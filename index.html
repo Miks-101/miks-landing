@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F5F2">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-title" content="Микс">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='11' fill='%23F6F5F2'/%3E%3Crect x='27' y='5' width='4.6' height='8' rx='1.2' fill='%23C9874F'/%3E%3Cpath d='M6 20.5 22 7l16 13.5' fill='none' stroke='%232E5E4E' stroke-width='4.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11 20.5V35a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3V20.5L22 11.2z' fill='%232E5E4E'/%3E%3Crect x='16.6' y='21.6' width='5' height='5' rx='1' fill='%23C9874F'/%3E%3Crect x='22.4' y='21.6' width='5' height='5' rx='1' fill='%23fff'/%3E%3Crect x='16.6' y='27.4' width='5' height='5' rx='1' fill='%23fff'/%3E%3Crect x='22.4' y='27.4' width='5' height='5' rx='1' fill='%23E9D9B8'/%3E%3C/svg%3E">
+<title>Микс — магазин стройматериалов по низким ценам</title>
+<meta name="description" content="Микс — магазин стройматериалов по низким ценам. Подберите материал под дом, дачу или квартиру, получите скидку за большой объём — цену узнаете одним звонком.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F5F2;
+    --surface:#FFFFFF;
+    --sand:#EEEAE3;
+    --ink:#23262A;
+    --ink-2:#4B5057;
+    --muted:#80858C;
+    --line:#E2DFD9;
+    --accent:#2E5E4E;
+    --accent-2:#244B3E;
+    --accent-soft:#E3ECE8;
+    --warm:#B5703F;
+    --radius:14px;
+    --radius-s:10px;
+    --shadow:0 1px 2px rgba(35,38,42,.04), 0 8px 24px -12px rgba(35,38,42,.16);
+    --head:"Manrope", system-ui, sans-serif;
+    --body:"Onest", system-ui, sans-serif;
+    --gutter:clamp(16px,4vw,40px);
+    --max:1180px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);overflow-x:clip;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
+  a,button{touch-action:manipulation}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  h1,h2,h3{font-family:var(--head);margin:0;line-height:1.15;letter-spacing:-.015em}
+  h1{font-size:clamp(32px,4.6vw,54px);font-weight:800}
+  h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}
+  h3{font-size:clamp(18px,1.8vw,21px);font-weight:700}
+  p{margin:0}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  section{scroll-margin-top:72px}
+
+  /* кнопки */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font:600 16px/1 var(--body);text-decoration:none;cursor:pointer;
+    padding:15px 22px;border-radius:999px;border:1px solid transparent;
+    background:var(--accent);color:#fff;transition:background .2s, border-color .2s, color .2s, transform .2s;
+  }
+  .btn:hover{background:var(--accent-2)}
+  .btn:active{transform:scale(.98)}
+  .btn--ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+  .btn--ghost:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+  .btn svg{width:18px;height:18px;flex:none}
+
+  /* плашка и шапка */
+  .ribbon{background:var(--accent);color:#fff;text-align:center;font:500 14px/1.4 var(--body);padding:9px var(--gutter)}
+  .ribbon span{opacity:.6;margin:0 8px}
+  .header{position:sticky;top:0;z-index:50;background:rgba(246,245,242,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+  .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .logo__mark{width:44px;height:44px;flex:none;overflow:visible}
+  .logo__mark .roof,.logo__mark .chimney{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .logo__mark .pane{transition:fill .35s}
+  .logo:hover .roof,.logo:hover .chimney{transform:translateY(-2px)}
+  .logo:hover .pane-a{fill:#fff}
+  .logo:hover .pane-b{fill:#C9874F}
+  .logo__name{font:800 22px/1 var(--head);letter-spacing:.06em}
+  .logo__sub{display:block;font:500 12.5px/1.2 var(--body);color:var(--muted);margin-top:3px}
+  .nav{display:flex;gap:26px;font:500 15px var(--body)}
+  .nav a{text-decoration:none;color:var(--ink-2)}
+  .nav a:hover{color:var(--accent)}
+  .call{display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;line-height:1.15}
+  .call__num{font:700 18px/1.2 var(--head);white-space:nowrap;display:flex;align-items:center;gap:8px}
+  .call__num svg{width:17px;height:17px;color:var(--accent)}
+  .call__hours{font-size:13px;color:var(--muted);margin-top:3px}
+  .call:hover .call__num{color:var(--accent)}
+
+  /* hero */
+  .hero{padding:clamp(40px,6vw,80px) 0 clamp(50px,7vw,90px)}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 13.5px/1.3 var(--body);color:var(--accent);background:var(--accent-soft);padding:7px 12px;border-radius:999px}
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .hero h1{margin:20px 0 18px}
+  .hero__lead{font-size:clamp(17px,1.5vw,19px);color:var(--ink-2);max-width:560px}
+  .micro{list-style:none;padding:0;margin:26px 0 32px;display:grid;gap:12px}
+  .micro li{display:flex;gap:12px;align-items:flex-start;color:var(--ink)}
+  .micro li::before{content:"";flex:none;width:20px;height:20px;margin-top:3px;border-radius:50%;background:var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%232E5E4E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+  .pick__label{font:600 15px var(--body);color:var(--muted);margin-bottom:12px}
+  .pick{display:flex;flex-wrap:wrap;gap:10px}
+  .pick .btn{flex:1 1 0;min-width:0;padding-inline:14px}
+  .pick .btn.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  .mosaic{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr 1fr;gap:12px;aspect-ratio:1/1.02}
+  .mosaic figure{margin:0;border-radius:var(--radius);overflow:hidden;position:relative;background:var(--sand)}
+  .mosaic figure:first-child{grid-row:span 2}
+  .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+  .mosaic figure:hover img{transform:scale(1.04)}
+  .mosaic figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);font:600 13px var(--body);padding:5px 10px;border-radius:999px}
+  .badge-disc{
+    position:absolute;right:-8px;top:-8px;z-index:2;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);
+    border-radius:var(--radius-s);padding:10px 14px;font:600 14px/1.3 var(--body)
+  }
+  .badge-disc b{display:block;color:var(--accent);font:800 16px var(--head)}
+  .mosaic-wrap{position:relative}
+
+  /* появление */
+  .fade{opacity:0;transform:translateY(14px);animation:fade .8s cubic-bezier(.2,.8,.2,1) forwards}
+  .f1{animation-delay:.05s}.f2{animation-delay:.12s}.f3{animation-delay:.2s}.f4{animation-delay:.28s}.f5{animation-delay:.36s}.f6{animation-delay:.3s}
+  @keyframes fade{to{opacity:1;transform:none}}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* секции */
+  .sec{padding:clamp(64px,8vw,104px) 0}
+  .sec--sand{background:var(--sand)}
+  .sec-head{max-width:720px;margin-bottom:clamp(30px,4vw,48px)}
+  .sec-head p{color:var(--ink-2);margin-top:14px;font-size:18px}
+
+  /* каталог */
+  .controls{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px}
+  .seg button{font:600 14.5px/1 var(--body);border:0;background:transparent;color:var(--ink-2);padding:10px 16px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips button{font:500 14px/1 var(--body);border:1px solid var(--line);background:transparent;color:var(--ink-2);padding:9px 14px;border-radius:999px;cursor:pointer;transition:all .2s}
+  .chips button:hover{border-color:var(--ink-2)}
+  .chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .status{font-size:15px;color:var(--muted);min-height:24px;margin-bottom:22px}
+  .status b{color:var(--accent);font-weight:600}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:opacity .35s, box-shadow .3s, border-color .3s, transform .3s}
+  @media (hover:hover){ .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)} }
+  .card.dim{opacity:.4}
+  .card.fit{border-color:#BFD3CA}
+  .card[hidden]{display:none}
+  .card__img{aspect-ratio:4/3;background:var(--sand);overflow:hidden;position:relative}
+  .card__img img{width:100%;height:100%;object-fit:cover}
+  .card__cat{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.94);font:600 12px/1 var(--body);padding:6px 9px;border-radius:999px;color:var(--ink-2)}
+  .card__body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .fits{display:flex;flex-wrap:wrap;gap:6px}
+  .fits span{font:500 12.5px/1 var(--body);padding:5px 9px;border-radius:999px;background:var(--bg);color:var(--muted)}
+  .fits span.on{background:var(--accent-soft);color:var(--accent)}
+  .why{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+  .why li{display:flex;gap:8px}
+  .why li::before{content:"";flex:none;width:5px;height:5px;margin-top:8px;border-radius:50%;background:var(--accent)}
+  .price{margin-top:auto;padding-top:4px}
+  .price__btn{width:100%;padding:13px 16px;font-size:15px}
+  .price.open .price__btn{background:var(--surface);color:var(--accent);border-color:var(--accent)}
+  .price__out{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
+  .price__out > div{overflow:hidden}
+  .price.open .price__out{grid-template-rows:1fr}
+  .price__box{margin-top:10px;padding:12px 14px;border-radius:var(--radius-s);background:var(--accent-soft)}
+  .price__tel{display:inline-flex;align-items:center;gap:8px;font:800 19px/1.2 var(--head);color:var(--accent);text-decoration:none}
+  .price__tel:hover{text-decoration:underline}
+  .price__tel svg{width:17px;height:17px}
+  .price__note{font-size:13.5px;color:var(--ink-2);margin-top:5px;line-height:1.4}
+  .price__hours{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .more{display:flex;justify-content:center;margin-top:28px}
+  .more[hidden]{display:none}
+  .notfound{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px 26px;border-radius:var(--radius);background:var(--surface);border:1px dashed #C9C5BD}
+  .notfound h3{margin-bottom:4px}
+  .notfound p{color:var(--ink-2);font-size:15.5px}
+
+  /* выгоды */
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .value{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .value__icon{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+  .value__icon svg{width:22px;height:22px}
+  .value h3{margin-bottom:8px}
+  .value p{color:var(--ink-2);font-size:16px}
+  .value--accent{background:var(--accent);border-color:var(--accent);color:#fff}
+  .value--accent p{color:rgba(255,255,255,.82)}
+  .value--accent .value__icon{background:rgba(255,255,255,.14);color:#fff}
+
+  /* узнаёте себя */
+  .recog{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,64px);align-items:start}
+  .recog__q{font:700 clamp(22px,2.6vw,30px)/1.3 var(--head)}
+  .recog__q mark{background:none;color:var(--accent)}
+  .recog__or{display:block;margin:14px 0;color:var(--muted);font-size:15px}
+  .pains{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .pains li{
+    display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-s);
+    padding:15px 18px;cursor:pointer;user-select:none;transition:border-color .2s, background .2s, opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+  }
+  .pains li:hover{border-color:#BFD3CA}
+  .pains .box{flex:none;width:20px;height:20px;margin-top:2px;border:1.5px solid #B9B5AE;border-radius:6px;display:grid;place-items:center;transition:all .2s}
+  .pains li.checked{border-color:var(--accent);background:#FAFCFB}
+  .pains li.checked .box{background:var(--accent);border-color:var(--accent)}
+  .pains li.checked .box::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+  .pains small{display:block;font-size:12.5px;color:var(--muted);margin-bottom:2px}
+  .recog__cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .recog__cta span{color:var(--muted);font-size:15px}
+
+  /* как решите */
+  .jobs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .job{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,32px)}
+  .job__label{font:600 13px var(--body);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+  .job h3{margin:8px 0 22px;font-size:clamp(19px,2vw,23px)}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:18px}
+  .steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:14px}
+  .steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font:700 15px var(--head)}
+  .steps b{display:block;font-weight:600}
+  .steps span{display:block;color:var(--ink-2);font-size:15.5px;margin-top:2px}
+
+  /* результат */
+  .result{background:var(--accent);color:#fff}
+  .result .sec-head p{color:rgba(255,255,255,.8)}
+  .feel{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
+  .feel__item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);padding:24px}
+  .feel__word{font:800 clamp(22px,2.4vw,28px)/1.1 var(--head);margin-bottom:8px}
+  .feel__item p{color:rgba(255,255,255,.82);font-size:16px}
+  .bigjobs{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid rgba(255,255,255,.2)}
+  .bigjobs li{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.2);font:600 clamp(17px,1.9vw,21px)/1.35 var(--head)}
+  .bigjobs li::before{content:"";flex:none;width:28px;height:28px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%232E5E4E' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/22px no-repeat}
+
+  /* сомнения */
+  .faq{display:grid;gap:12px;max-width:860px}
+  .faq details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:border-color .2s, opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+  .faq details[open]{border-color:#BFD3CA}
+  .faq summary{list-style:none;cursor:pointer;padding:20px 60px 20px 22px;position:relative;font:700 clamp(17px,1.8vw,19px)/1.35 var(--head)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:22px;top:50%;width:10px;height:10px;margin-top:-7px;border:solid var(--muted);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .25s}
+  .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px;border-color:var(--accent)}
+  .faq .ans{padding:0 22px 22px;color:var(--ink-2)}
+  .faq .ans a{color:var(--accent);font-weight:600}
+
+  /* конкуренты */
+  .rivals{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .rival{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:grid;gap:14px}
+  .rival h3{font-size:clamp(17px,1.7vw,19px)}
+  .rival__row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;font-size:15.5px}
+  .rival__tag{font:600 12px/1 var(--body);padding:6px 9px;border-radius:999px;white-space:nowrap;margin-top:2px}
+  .rival__tag--them{background:#F3EEEA;color:#8A6D5B}
+  .rival__tag--us{background:var(--accent-soft);color:var(--accent)}
+  .rival__row p{color:var(--ink-2)}
+
+  /* финал */
+  .final{padding:clamp(64px,8vw,100px) 0}
+  .final__box{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,4vw,48px);align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,4vw,52px);box-shadow:var(--shadow)}
+  .final p{color:var(--ink-2);font-size:18px;margin-top:14px}
+  .final__card{background:var(--sand);border-radius:var(--radius);padding:26px}
+  .final__label{font-size:14px;color:var(--muted)}
+  .final__tel{display:block;font:800 clamp(24px,3vw,32px)/1.15 var(--head);text-decoration:none;margin:6px 0 4px;color:var(--ink)}
+  .final__tel:hover{color:var(--accent)}
+  .final__perks{list-style:none;padding:0;margin:16px 0 18px;display:grid;gap:6px;font-size:15px;color:var(--ink-2)}
+  .final__perks li{display:flex;gap:8px}
+  .final__perks li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--accent)}
+  .final__card .btn{width:100%}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 110px;font-size:14px;color:var(--muted)}
+  footer .wrap{display:grid;gap:14px}
+  .foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+  footer a{color:var(--ink-2)}
+  .credits summary{cursor:pointer;color:var(--ink-2)}
+  .credits ul{margin:10px 0 0;padding-left:18px;display:grid;gap:4px;font-size:13px}
+
+  /* мобильная кнопка звонка */
+  .callbar{position:fixed;left:max(12px, env(safe-area-inset-left));right:max(12px, env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;display:none;transform:translateY(140%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .callbar.show{transform:none}
+  .callbar .btn{width:100%;padding:15px 18px;box-shadow:0 10px 30px -8px rgba(46,94,78,.55)}
+  .callbar small{display:block;font:400 12px var(--body);opacity:.85;margin-top:3px}
+
+  @media (max-width:1060px){
+    .grid{grid-template-columns:repeat(3,1fr)}
+    .nav{display:none}
+  }
+  @media (max-width:880px){
+    .hero .wrap,.recog,.final__box{grid-template-columns:1fr}
+    .mosaic{aspect-ratio:4/3;max-width:560px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .values,.feel{grid-template-columns:1fr 1fr}
+    .jobs,.rivals{grid-template-columns:1fr}
+  }
+  /* телефоны (iPhone и Android) */
+  @media (max-width:600px){
+    :root{--gutter:16px}
+    body{font-size:16px}
+    h1{font-size:clamp(28px,8vw,34px)}
+    h2{font-size:clamp(24px,7vw,30px)}
+    .ribbon{font-size:12.5px;padding:8px 16px}
+    .ribbon span{margin:0 5px}
+    .header .wrap{min-height:60px;gap:12px}
+    .logo{gap:8px}
+    .logo__mark{width:38px;height:38px}
+    .logo__sub,.call__hours{display:none}
+    .logo__name{font-size:19px}
+    .call__num{font-size:15.5px}
+    .hero{padding:28px 0 48px}
+    .hero h1{margin:16px 0 14px}
+    .micro{margin:20px 0 24px;gap:10px}
+    .pick{gap:8px}
+    .pick .btn{flex-direction:column;gap:6px;padding:14px 6px;border-radius:16px;font-size:15px}
+    .pick .btn svg{width:22px;height:22px}
+    .mosaic{aspect-ratio:4/3;gap:8px}
+    .mosaic figcaption{font-size:12px;padding:4px 8px;left:8px;bottom:8px}
+    .badge-disc{right:8px;top:8px;font-size:12px;padding:8px 10px}
+    .badge-disc b{font-size:14px}
+    .sec{padding:56px 0}
+    .sec-head p{font-size:16px}
+    .controls{gap:12px}
+    .seg{width:100%}
+    .seg button{flex:1;padding:11px 4px;font-size:14px;min-height:42px}
+    .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none;scroll-snap-type:x proximity}
+    .chips::-webkit-scrollbar{display:none}
+    .chips button{flex:none;min-height:40px;scroll-snap-align:start}
+    .grid{grid-template-columns:1fr;gap:14px}
+    .card__img{aspect-ratio:16/10}
+    .card__body{padding:14px 16px 16px}
+    .price__btn{min-height:48px}
+    .notfound{padding:18px}
+    .notfound .btn{width:100%}
+    .values,.feel{grid-template-columns:1fr}
+    .value{padding:22px 20px}
+    .recog__cta .btn,.final__card .btn{width:100%}
+    .pains li{padding:14px 16px}
+    .faq summary{padding:18px 48px 18px 18px}
+    .faq .ans{padding:0 18px 18px}
+    .rival{padding:20px}
+    .final__box{padding:22px;border-radius:18px}
+    .final__card{padding:20px}
+    footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+    .callbar{display:block}
+  }
+  /* очень узкие экраны (iPhone SE, компактные Android) */
+  @media (max-width:360px){
+    .call__num .call__text{display:none}
+    .call__num{width:42px;height:42px;border-radius:50%;background:var(--accent);justify-content:center}
+    .call__num svg{color:#fff;width:19px;height:19px}
+    .pick .btn{font-size:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+    .reveal,.fade{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-house" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M3 11 12 3.5l9 7.5M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></symbol>
+  <symbol id="i-dacha" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M2 12 8.5 5.5 15 12M4 10.5V20h9v-9.5M18.5 20v-5M18.5 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 20H2"/></symbol>
+  <symbol id="i-flat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M5 21V3h14v18M3 21h18M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 7 10 17l-5-5"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9zM7.5 7.5h.01"/></symbol>
+  <symbol id="i-stack" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m12 3 9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+</svg>
+
+<div class="ribbon">Магазин низких цен<span>·</span>Скидка за большой объём покупки</div>
+
+<header class="header">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Микс — на главную">
+      <svg class="logo__mark" viewBox="0 0 44 44" aria-hidden="true">
+        <rect class="chimney" x="27" y="5" width="4.6" height="8" rx="1.2" fill="#C9874F"/>
+        <path class="roof" d="M6 20.5 22 7l16 13.5" fill="none" stroke="#2E5E4E" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 20.5V35a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3V20.5L22 11.2z" fill="#2E5E4E"/>
+        <rect class="pane pane-a" x="16.6" y="21.6" width="5" height="5" rx="1" fill="#C9874F"/>
+        <rect class="pane" x="22.4" y="21.6" width="5" height="5" rx="1" fill="#fff"/>
+        <rect class="pane" x="16.6" y="27.4" width="5" height="5" rx="1" fill="#fff"/>
+        <rect class="pane pane-b" x="22.4" y="27.4" width="5" height="5" rx="1" fill="#E9D9B8"/>
+      </svg>
+      <span><span class="logo__name">МИКС</span><span class="logo__sub">магазин стройматериалов</span></span>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#catalog">Каталог</a>
+      <a href="#benefits">Выгоды</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="call" href="tel:+79519459239" data-event="tel_header">
+      <span class="call__num" aria-label="Позвонить: +7 (951) 945-92-39"><svg><use href="#i-phone"/></svg><span class="call__text">+7 (951) 945-92-39</span></span>
+      <span class="call__hours">Пн–Сб 9:00–19:00, Вс 10:00–17:00</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow fade f1">Низкие цены и скидка за большой объём</span>
+        <h1 class="fade f2">Подберите материал для своего объекта и не купите лишнего</h1>
+        <p class="hero__lead fade f3">Каталог «Микс» с подсказками «для чего подходит» у каждого товара. Выбрали — нажмите на номер и узнайте цену за пару минут.</p>
+        <ul class="micro fade f4">
+          <li>Найти материалы для своего объекта: дома, дачи или квартиры</li>
+          <li>Понять, подходит ли выбранный материал именно под ваш случай</li>
+          <li>Узнать цену и получить консультацию у продавца</li>
+        </ul>
+        <div class="fade f5">
+          <div class="pick__label">Что строите или ремонтируете?</div>
+          <div class="pick">
+            <a href="#catalog" class="btn btn--ghost" data-pick="house" data-event="pick_house"><svg><use href="#i-house"/></svg>Дом</a>
+            <a href="#catalog" class="btn btn--ghost" data-pick="dacha" data-event="pick_dacha"><svg><use href="#i-dacha"/></svg>Дача</a>
+            <a href="#catalog" class="btn btn--ghost" data-pick="flat" data-event="pick_flat"><svg><use href="#i-flat"/></svg>Квартира</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mosaic-wrap fade f6">
+        <div class="badge-disc"><b>−% за объём</b>чем больше берёте — тем выгоднее</div>
+        <div class="mosaic">
+          <figure><img src="img/house.jpg" alt="Дом из клеёного бруса" loading="eager"><figcaption>Брус для дома</figcaption></figure>
+          <figure><img src="img/terrace.jpg" alt="Образцы террасной доски разных оттенков"><figcaption>Террасная доска</figcaption></figure>
+          <figure><img src="img/ecover.jpg" alt="Утеплитель из минеральной ваты: плиты и рулоны"><figcaption>Утеплитель</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАТАЛОГ -->
+  <section class="sec sec--sand" id="catalog">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Найдите свой материал за минуту</h2>
+        <p>Выберите, что строите или ремонтируете, — подсветим подходящие материалы. Понравился товар — нажмите «Уточнить стоимость» и позвоните нам в одно касание.</p>
+      </div>
+
+      <div class="controls reveal">
+        <div class="seg" role="group" aria-label="Тип объекта">
+          <button type="button" data-obj="all" aria-pressed="true">Все</button>
+          <button type="button" data-obj="house" aria-pressed="false">Дом</button>
+          <button type="button" data-obj="dacha" aria-pressed="false">Дача</button>
+          <button type="button" data-obj="flat" aria-pressed="false">Квартира</button>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Категория"></div>
+      </div>
+      <div class="status" id="status" aria-live="polite"></div>
+
+      <div class="grid" id="grid"></div>
+      <noscript><p>Каталог доступен по телефону: <a href="tel:+79519459239">+7 (951) 945-92-39</a></p></noscript>
+
+      <div class="more"><button type="button" class="btn btn--ghost" id="more">Показать все товары</button></div>
+
+      <div class="notfound reveal">
+        <div>
+          <h3>Не нашли нужное? Позвоните нам</h3>
+          <p>В магазине больше позиций, чем на сайте, — подберём по телефону.</p>
+        </div>
+        <a class="btn" href="tel:+79519459239" data-event="tel_notfound"><svg><use href="#i-phone"/></svg>+7 (951) 945-92-39</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВЫГОДЫ -->
+  <section class="sec" id="benefits">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>Что вы получите с «Микс»</h2></div>
+      <div class="values">
+        <div class="value reveal"><div class="value__icon"><svg><use href="#i-grid"/></svg></div><h3>Весь ассортимент в одном месте</h3><p>Пиломатериалы, утеплители, сухие смеси, кровля и расходники разложены по понятным категориям.</p></div>
+        <div class="value reveal"><div class="value__icon"><svg><use href="#i-check"/></svg></div><h3>Уверенность, что материал подходит вам</h3><p>В каждой карточке указано, для какого объекта он предназначен, и перечислены главные преимущества простым языком.</p></div>
+        <div class="value value--accent reveal"><div class="value__icon"><svg><use href="#i-tag"/></svg></div><h3>Низкие цены</h3><p>Вы покупаете качественные материалы и не переплачиваете.</p></div>
+        <div class="value value--accent reveal"><div class="value__icon"><svg><use href="#i-stack"/></svg></div><h3>Скидка за большой объём</h3><p>Чем больше берёте на стройку или ремонт, тем выгоднее итоговая цена.</p></div>
+        <div class="value reveal"><div class="value__icon"><svg><use href="#i-bolt"/></svg></div><h3>Цена без поиска и ожидания</h3><p>Кнопка «Уточнить стоимость» и номер в шапке кликабельны: нажали — и уже звоните.</p></div>
+        <div class="value reveal"><div class="value__icon"><svg><use href="#i-chat"/></svg></div><h3>Совет от живого человека</h3><p>Продавец подскажет, что брать под ваш объект и сколько, и сразу назовёт цену и наличие.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- УЗНАЁТЕ СЕБЯ -->
+  <section class="sec sec--sand">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>Узнаёте себя?</h2><p>Отметьте, что про вас.</p></div>
+      <div class="recog">
+        <div class="reveal">
+          <p class="recog__q">Вы хотите <mark>обустроить своё жильё качественно и без ошибок</mark>?</p>
+          <span class="recog__or">или</span>
+          <p class="recog__q"><mark>Закончить стройку</mark> и наконец жить в комфорте, гордясь результатом?</p>
+        </div>
+        <div>
+          <ul class="pains" id="pains">
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Ситуация</small>Начали строить дом или дачу — и упёрлись в выбор материалов?</span></li>
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Ситуация</small>Затеяли ремонт, а на рынке сотни вариантов, и все называются похоже?</span></li>
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Ощущение</small>Растерялись: вроде всё одинаковое, но чем отличается — непонятно</span></li>
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Ощущение</small>Тревожно: деньги немалые, а переделывать будет ещё дороже</span></li>
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Проблема</small>Не понимаете, подойдёт ли материал именно под ваш дом, дачу или квартиру</span></li>
+            <li class="reveal" tabindex="0" role="checkbox" aria-checked="false"><span class="box"></span><span><small>Проблема</small>Не к кому быстро обратиться за советом, а разбираться самому долго</span></li>
+          </ul>
+          <div class="recog__cta reveal">
+            <a class="btn" href="tel:+79519459239" data-event="tel_recog"><svg><use href="#i-phone"/></svg>Позвоните для консультации</a>
+            <span id="painsNote">Поможем с каждым пунктом</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК РЕШИТЕ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>Как вы решите свою задачу с «Микс»</h2></div>
+      <div class="jobs">
+        <div class="job reveal">
+          <span class="job__label">Задача 1</span>
+          <h3>Понять, какой материал подходит под мой объект, чтобы не купить неподходящего</h3>
+          <ol class="steps">
+            <li><div><b>Выбираете категорию</b><span>Видите весь ассортимент магазина и ничего не упускаете</span></div></li>
+            <li><div><b>Открываете карточку товара</b><span>По фото, характеристикам и пометке «для чего подходит» сразу видите, ваш это вариант или нет</span></div></li>
+            <li><div><b>Читаете преимущества товара</b><span>Понимаете, что конкретно даст вам материал: долговечность, тепло, экологичность, простой монтаж</span></div></li>
+            <li><div><b>Не нашли нужного</b><span>В блоке «Не нашли нужное? Позвоните нам» вам подберут материал по телефону</span></div></li>
+          </ol>
+        </div>
+        <div class="job reveal">
+          <span class="job__label">Задача 2</span>
+          <h3>Быстро позвонить и получить консультацию и цену</h3>
+          <ol class="steps">
+            <li><div><b>Нажимаете «Уточнить стоимость»</b><span>Появляется номер магазина, и звонок начинается с одного касания</span></div></li>
+            <li><div><b>Видите часы работы рядом с номером</b><span>Звоните тогда, когда точно дозвонитесь</span></div></li>
+            <li><div><b>Рассказываете продавцу о своём объекте</b><span>Получаете цену, наличие и совет, сколько и чего брать</span></div></li>
+            <li><div><b>Берёте материалы на весь объект сразу</b><span>Получаете скидку за объём и экономите бюджет стройки</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <section class="sec result">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>К чему вы придёте</h2></div>
+      <div class="feel">
+        <div class="feel__item reveal"><div class="feel__word">Уверенность</div><p>Материал выбран правильно и подходит вашему объекту.</p></div>
+        <div class="feel__item reveal"><div class="feel__word">Спокойствие</div><p>Вы купили по низкой цене, со скидкой за объём, и переделывать ничего не придётся.</p></div>
+        <div class="feel__item reveal"><div class="feel__word">Гордость</div><p>Дом, дача или квартира сделаны качественно, своими руками и своими решениями.</p></div>
+      </div>
+      <ul class="bigjobs">
+        <li class="reveal">Вы обустроите своё жильё качественно и без ошибок</li>
+        <li class="reveal">Вы доведёте стройку или ремонт до конца без лишних трат и переделок</li>
+        <li class="reveal">Вы будете жить в комфорте и с удовольствием показывать результат близким</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- СОМНЕНИЯ -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>У вас есть сомнения?</h2></div>
+      <div class="faq">
+        <details class="reveal" open>
+          <summary>«На сайте нет цен — значит, дорого или будут навязывать»</summary>
+          <div class="ans">Наоборот: «Микс» — магазин низких цен. Цену называем по телефону, потому что она зависит от объёма: при большой покупке действует скидка, и продавец сразу посчитает выгодный для вас вариант. <a href="tel:+79519459239" data-event="tel_faq">Позвоните</a> — разговор займёт пару минут, и вы ни к чему не обязаны.</div>
+        </details>
+        <details class="reveal">
+          <summary>«Я ничего не понимаю в материалах»</summary>
+          <div class="ans">Каталог сделан для таких покупателей: в каждой карточке написано, для чего подходит материал, а преимущества объяснены простым языком. Остальное подскажет продавец.</div>
+        </details>
+        <details class="reveal">
+          <summary>«Позвоню, а там никто не возьмёт трубку»</summary>
+          <div class="ans">Рядом с номером всегда указаны часы работы — Пн–Сб 9:00–19:00, Вс 10:00–17:00, — чтобы вы звонили, когда магазин точно на связи.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНКУРЕНТЫ -->
+  <section class="sec sec--sand">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2>Почему «Микс», а не…</h2></div>
+      <div class="rivals">
+        <article class="rival reveal">
+          <h3>Крупные маркетплейсы и строительные гипермаркеты</h3>
+          <div class="rival__row"><span class="rival__tag rival__tag--them">Там</span><p>Тысячи позиций без объяснения, кому что подходит, и никого, кого можно спросить.</p></div>
+          <div class="rival__row"><span class="rival__tag rival__tag--us">У нас</span><p>Понятный каталог с пометками «для чего подходит» и живой продавец в одно касание.</p></div>
+        </article>
+        <article class="rival reveal">
+          <h3>Советы на форумах, в чатах и от знакомых</h3>
+          <div class="rival__row"><span class="rival__tag rival__tag--them">Там</span><p>Долго, противоречиво, и часто советуют то, что подошло другим.</p></div>
+          <div class="rival__row"><span class="rival__tag rival__tag--us">У нас</span><p>Совет под ваш объект от людей, которые каждый день продают эти материалы.</p></div>
+        </article>
+        <article class="rival reveal">
+          <h3>Объезд строительных рынков</h3>
+          <div class="rival__row"><span class="rival__tag rival__tag--them">Там</span><p>Тратите выходной, а продавцы торопятся и не вникают.</p></div>
+          <div class="rival__row"><span class="rival__tag rival__tag--us">У нас</span><p>Спокойно выбираете дома, звоните и забираете на месте то, что нужно.</p></div>
+        </article>
+        <article class="rival reveal">
+          <h3>Магазины «у дома» с наценкой</h3>
+          <div class="rival__row"><span class="rival__tag rival__tag--them">Там</span><p>Удобно, но дорого, особенно когда материалов нужно много.</p></div>
+          <div class="rival__row"><span class="rival__tag rival__tag--us">У нас</span><p>Низкие цены и скидка за большой объём — закупка на весь объект заметно выгоднее.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <section class="final" id="call">
+    <div class="wrap">
+      <div class="final__box reveal">
+        <div>
+          <h2>Расскажите, что строите, — подберём материалы</h2>
+          <p>Назовём цену, проверим наличие и посчитаем скидку за объём. Звонок ни к чему не обязывает.</p>
+        </div>
+        <div class="final__card">
+          <span class="final__label">Магазин стройматериалов «Микс»</span>
+          <a class="final__tel" href="tel:+79519459239" data-event="tel_final">+7 (951) 945-92-39</a>
+          <span class="final__label">Пн–Сб 9:00–19:00, Вс 10:00–17:00</span>
+          <ul class="final__perks">
+            <li>Магазин низких цен</li>
+            <li>Скидка за большой объём покупки</li>
+            <li>Подскажем, что подходит дому, даче или квартире</li>
+          </ul>
+          <a class="btn" href="tel:+79519459239" data-event="tel_final_btn"><svg><use href="#i-phone"/></svg>Позвонить в «Микс»</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>© «Микс» — магазин стройматериалов. Низкие цены, скидка за объём.</span>
+      <span>Опт и розница: <a href="tel:+79519459239" data-event="tel_footer">+7 (951) 945-92-39</a> · Пн–Сб 9:00–19:00, Вс 10:00–17:00</span>
+    </div>
+    <details class="credits">
+      <summary>Фото: авторы и лицензии</summary>
+      <ul>
+        <li>Брус для дома — Дмитрий Кошелев, <a href="https://commons.wikimedia.org/wiki/File:Glued_laminated_timber_house.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, общественное достояние</li>
+        <li>Террасная доска — Sebastian Möricke, <a href="https://commons.wikimedia.org/wiki/File:Farbige-terassendiele-accoya.JPG" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 3.0</li>
+        <li>Вагонка — Misburg3014, <a href="https://commons.wikimedia.org/wiki/File:Rauhspund-Profil.JPG" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 3.0</li>
+        <li>Минеральная вата — FMI Fachverband Mineralwolleindustrie, <a href="https://commons.wikimedia.org/wiki/File:Arrangement_Mineralwolle.jpeg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 3.0 DE</li>
+        <li>Цемент — Ivan Radic, <a href="https://www.flickr.com/photos/26344495@N05/50550618521" rel="noopener" target="_blank">Flickr</a>, CC BY 2.0</li>
+        <li>Шифер — HelenOnline, <a href="https://commons.wikimedia.org/wiki/File:Corrugated_fibre_cement_roofing_2.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 3.0</li>
+        <li>Монтажная пена — Ivan Radic, <a href="https://www.flickr.com/photos/26344495@N05/49424718517" rel="noopener" target="_blank">Flickr</a>, CC BY 2.0</li>
+        <li>Гипсокартон — RossKur, <a href="https://commons.wikimedia.org/wiki/File:Stapel_Gipskartonplatten.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY 4.0</li>
+        <li>Кирпич — 玄史生, <a href="https://commons.wikimedia.org/wiki/File:Red_Bricks_Stack_on_Sidewalk_of_Lane_212,_Section_5,_Minsheng_East_Road,_Taipei_20160829.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC0</li>
+        <li>Крепёж — Asurnipal, <a href="https://commons.wikimedia.org/wiki/File:Dornbirn-A4_Screws_assortment-01ASD.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Герметики — Vis M, <a href="https://commons.wikimedia.org/wiki/File:Silicone_sealant.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Краска — Ionenlaser, <a href="https://commons.wikimedia.org/wiki/File:Paint_bucket_and_brush.jpg" rel="noopener" target="_blank">Wikimedia Commons</a>, CC0</li>
+      </ul>
+    </details>
+  </div>
+</footer>
+
+<div class="callbar" id="callbar">
+  <a class="btn" href="tel:+79519459239" data-event="tel_callbar">
+    <svg><use href="#i-phone"/></svg>
+    <span>Уточнить стоимость<small>Пн–Сб 9–19, Вс 10–17 · скидка за объём</small></span>
+  </a>
+</div>
+
+<script>
+(function(){
+  var PHONE = '+7 (951) 945-92-39', TEL = 'tel:+79519459239', HOURS = 'Пн–Сб 9:00–19:00, Вс 10:00–17:00';
+
+  // Товары каталога: obj — для каких объектов подходит (house / dacha / flat)
+  var CATALOG = [
+    {cat:'Пиломатериалы', title:'Террасная доска', img:'terrace.jpg', obj:['house','dacha'],
+      why:['Красивый настил для террасы, веранды и дорожек','Несколько оттенков под стиль дома','Монтаж своими руками за выходные']},
+    {cat:'Пиломатериалы', title:'Брус для дома (изба)', img:'house.jpg', obj:['house','dacha'],
+      why:['Тёплый дом — меньше расходов на отопление','Натуральное дерево: дом «дышит»','Подходит для постоянного проживания']},
+    {cat:'Пиломатериалы', title:'Вагонка', img:'lining.jpg', obj:['house','dacha','flat'],
+      why:['Уютная деревянная отделка стен и потолков','Подходит для бани, балкона и мансарды','Простой монтаж в шип-паз']},
+    {cat:'Утеплители', title:'Утеплитель Эковер', img:'ecover.jpg', obj:['house','dacha','flat'],
+      why:['Тепло зимой и прохлада летом','Не горит — повышает пожарную безопасность','Заодно глушит шум с улицы и от соседей']},
+    {cat:'Сухие смеси', title:'Цемент и цементные смеси', img:'cement.jpg', obj:['house','dacha','flat'],
+      why:['Для фундамента, стяжки и кладки','Надёжная прочность на годы','Посчитаем нужное количество мешков']},
+    {cat:'Кровля', title:'Шифер', img:'slate.jpg', obj:['house','dacha'],
+      why:['Выгодная кровля для дома, бани и построек','Не боится дождя и снега','Глушит шум дождя лучше металла']},
+    {cat:'Листовые материалы', title:'Гипсокартон', img:'drywall.jpg', obj:['house','dacha','flat'],
+      why:['Ровные стены и потолки без мокрой штукатурки','Быстро монтируется','Легко спрятать проводку и трубы']},
+    {cat:'Стеновые материалы', title:'Кирпич', img:'brick.jpg', obj:['house','dacha'],
+      why:['Для стен, печей, заборов и цоколя','Долговечный и негорючий','Подберём под задачу и объём']},
+    {cat:'Расходники', title:'Монтажная пена', img:'foam.jpg', obj:['house','dacha','flat'],
+      why:['Заполняет щели при установке окон и дверей','Утепляет и герметизирует швы','Бытовая и профессиональная — под пистолет']},
+    {cat:'Расходники', title:'Крепёж: саморезы и болты', img:'fasteners.jpg', obj:['house','dacha','flat'],
+      why:['Всё для сборки: от каркаса до отделки','Подскажем размер под ваш материал','Выгоднее при покупке на весь объект']},
+    {cat:'Расходники', title:'Герметики', img:'sealant.jpg', obj:['house','dacha','flat'],
+      why:['Для ванной, кухни, окон и кровли','Защищают швы от влаги и плесени','Бесцветные и белые — под задачу']},
+    {cat:'Расходники', title:'Краски и инструмент', img:'paint.jpg', obj:['house','dacha','flat'],
+      why:['Для стен, потолков, дерева и фасадов','Кисти, валики и всё для покраски','Поможем подобрать краску под поверхность']}
+  ];
+  var OBJ_NAMES = {house:'Дом', dacha:'Дача', flat:'Квартира'};
+  var OBJ_GEN = {house:'дома', dacha:'дачи', flat:'квартиры'};
+  var INITIAL = window.matchMedia('(max-width:600px)').matches ? 4 : 8;
+
+  // аналитика: события для метрик из PRD (нажатия «Уточнить стоимость» и клики по tel:)
+  window.dataLayer = window.dataLayer || [];
+  function track(name, extra){ window.dataLayer.push(Object.assign({event:name}, extra || {})); }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-event]');
+    if (el) track(el.getAttribute('data-event'), el.dataset.product ? {product:el.dataset.product} : null);
+  });
+
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  // карточки
+  var grid = document.getElementById('grid');
+  grid.innerHTML = CATALOG.map(function(p, i){
+    return '<article class="card" data-i="' + i + '">' +
+      '<div class="card__img"><img src="img/' + p.img + '" alt="' + esc(p.title) + '" loading="lazy"><span class="card__cat">' + esc(p.cat) + '</span></div>' +
+      '<div class="card__body">' +
+        '<h3>' + esc(p.title) + '</h3>' +
+        '<div class="fits">' + ['house','dacha','flat'].map(function(o){
+          return p.obj.indexOf(o) > -1 ? '<span data-o="' + o + '">' + OBJ_NAMES[o] + '</span>' : '';
+        }).join('') + '</div>' +
+        '<ul class="why">' + p.why.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' +
+        '<div class="price">' +
+          '<button type="button" class="btn price__btn" data-event="price_click" data-product="' + esc(p.title) + '" aria-expanded="false"><svg><use href="#i-phone"/></svg>Уточнить стоимость</button>' +
+          '<div class="price__out"><div><div class="price__box">' +
+            '<a class="price__tel" href="' + TEL + '" data-event="tel_card" data-product="' + esc(p.title) + '"><svg><use href="#i-phone"/></svg>' + PHONE + '</a>' +
+            '<p class="price__note">Позвоните — подскажем цену и наличие. При большом объёме — скидка.</p>' +
+            '<p class="price__hours">' + HOURS + '</p>' +
+          '</div></div></div>' +
+        '</div>' +
+      '</div></article>';
+  }).join('');
+  var cards = grid.querySelectorAll('.card');
+
+  // категории
+  var cats = ['Все категории'].concat(CATALOG.map(function(p){ return p.cat; }).filter(function(c, i, a){ return a.indexOf(c) === i; }));
+  var chips = document.getElementById('chips');
+  chips.innerHTML = cats.map(function(c, i){ return '<button type="button" aria-pressed="' + (i ? 'false' : 'true') + '" data-cat="' + (i ? esc(c) : '') + '">' + esc(c) + '</button>'; }).join('');
+
+  var state = {obj:'all', cat:'', expanded:false};
+  var status = document.getElementById('status');
+  var moreBtn = document.getElementById('more');
+
+  function render(){
+    var shown = 0, fit = 0, inCat = 0;
+    CATALOG.forEach(function(p, i){
+      var card = cards[i];
+      var catOk = !state.cat || p.cat === state.cat;
+      var objOk = state.obj === 'all' || p.obj.indexOf(state.obj) > -1;
+      if (catOk) inCat++;
+      var limitOk = state.expanded || state.cat || shown < INITIAL;
+      var visible = catOk && limitOk;
+      card.hidden = !visible;
+      if (visible) shown++;
+      card.classList.toggle('dim', state.obj !== 'all' && !objOk);
+      card.classList.toggle('fit', state.obj !== 'all' && objOk);
+      if (catOk && objOk) fit++;
+      card.querySelectorAll('.fits span').forEach(function(s){ s.classList.toggle('on', state.obj === 'all' || s.dataset.o === state.obj); });
+    });
+    moreBtn.parentNode.hidden = state.expanded || !!state.cat || inCat <= INITIAL;
+    status.innerHTML = state.obj === 'all'
+      ? 'В каталоге: <b>' + inCat + '</b> ' + plural(inCat) + '. Выберите объект — подсветим подходящее.'
+      : 'Для <b>' + OBJ_GEN[state.obj] + '</b> подходит <b>' + fit + ' из ' + inCat + '</b>. Нажмите «Уточнить стоимость» на понравившемся.';
+  }
+  function plural(n){ var a=n%10, b=n%100; return a===1&&b!==11?'позиция':(a>=2&&a<=4&&(b<10||b>=20)?'позиции':'позиций'); }
+
+  var segBtns = document.querySelectorAll('.seg button');
+  var pickBtns = document.querySelectorAll('[data-pick]');
+  function setObj(obj){
+    state.obj = obj;
+    if (obj !== 'all') state.expanded = true;
+    segBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.obj === obj ? 'true' : 'false'); });
+    pickBtns.forEach(function(a){ a.classList.toggle('is-active', a.dataset.pick === obj); });
+    render();
+  }
+  segBtns.forEach(function(b){ b.addEventListener('click', function(){ setObj(b.dataset.obj); track('catalog_object', {object:b.dataset.obj}); }); });
+  pickBtns.forEach(function(a){ a.addEventListener('click', function(){ setObj(a.dataset.pick); }); });
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    state.cat = b.dataset.cat;
+    chips.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    render(); track('catalog_category', {category:state.cat || 'all'});
+  });
+  moreBtn.addEventListener('click', function(){ state.expanded = true; render(); });
+
+  // «Уточнить стоимость» → раскрываем кликабельный номер
+  grid.addEventListener('click', function(e){
+    var btn = e.target.closest('.price__btn'); if (!btn) return;
+    var open = btn.parentNode.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  render();
+
+  // появление по скроллу
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'}) : null;
+  document.querySelectorAll('.reveal').forEach(function(el, i){
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    io ? io.observe(el) : el.classList.add('in');
+  });
+
+  // «Узнаёте себя?» — отметки
+  var note = document.getElementById('painsNote');
+  document.querySelectorAll('#pains li').forEach(function(li){
+    function toggle(){
+      li.classList.toggle('checked');
+      li.setAttribute('aria-checked', li.classList.contains('checked'));
+      var n = document.querySelectorAll('#pains li.checked').length;
+      note.textContent = n ? 'Отмечено: ' + n + ' — поможем разобраться' : 'Поможем с каждым пунктом';
+    }
+    li.addEventListener('click', toggle);
+    li.addEventListener('keydown', function(e){ if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggle(); } });
+  });
+
+  // мобильная кнопка звонка: после первого экрана, прячется у финального блока
+  var bar = document.getElementById('callbar'), finalSec = document.getElementById('call');
+  function onScroll(){
+    var r = finalSec.getBoundingClientRect();
+    bar.classList.toggle('show', window.scrollY > window.innerHeight * .7 && !(r.top < window.innerHeight && r.bottom > 0));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
