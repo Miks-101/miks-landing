@@ -11,7 +11,7 @@
 <meta name="description" content="Микс — магазин стройматериалов по низким ценам. Подберите материал под дом, дачу или квартиру, получите скидку за большой объём — цену узнаете одним звонком.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F6F5F2;
@@ -84,38 +84,170 @@
   .call__hours{font-size:13px;color:var(--muted);margin-top:3px}
   .call:hover .call__num{color:var(--accent)}
 
-  /* hero */
-  .hero{padding:clamp(40px,6vw,80px) 0 clamp(50px,7vw,90px)}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 13.5px/1.3 var(--body);color:var(--accent);background:var(--accent-soft);padding:7px 12px;border-radius:999px}
-  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
-  .hero h1{margin:20px 0 18px}
-  .hero__lead{font-size:clamp(17px,1.5vw,19px);color:var(--ink-2);max-width:560px}
-  .micro{list-style:none;padding:0;margin:26px 0 32px;display:grid;gap:12px}
-  .micro li{display:flex;gap:12px;align-items:flex-start;color:var(--ink)}
-  .micro li::before{content:"";flex:none;width:20px;height:20px;margin-top:3px;border-radius:50%;background:var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%232E5E4E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
-  .pick__label{font:600 15px var(--body);color:var(--muted);margin-bottom:12px}
-  .pick{display:flex;flex-wrap:wrap;gap:10px}
-  .pick .btn{flex:1 1 0;min-width:0;padding-inline:14px}
-  .pick .btn.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
-
-  .mosaic{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr 1fr;gap:12px;aspect-ratio:1/1.02}
-  .mosaic figure{margin:0;border-radius:var(--radius);overflow:hidden;position:relative;background:var(--sand)}
-  .mosaic figure:first-child{grid-row:span 2}
-  .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-  .mosaic figure:hover img{transform:scale(1.04)}
-  .mosaic figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);font:600 13px var(--body);padding:5px 10px;border-radius:999px}
-  .badge-disc{
-    position:absolute;right:-8px;top:-8px;z-index:2;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);
-    border-radius:var(--radius-s);padding:10px 14px;font:600 14px/1.3 var(--body)
+  /* ===== HERO: дом строится от чертежа до готового ===== */
+  :root{--chrome:107px}
+  .hx{position:relative;height:calc(100vh - var(--chrome));height:calc(100svh - var(--chrome));min-height:540px;overflow:hidden;background:var(--bg)}
+  .hx::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(46,94,78,.075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,94,78,.075) 1px, transparent 1px),
+      linear-gradient(rgba(46,94,78,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,94,78,.035) 1px, transparent 1px);
+    background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+    background-position:center center;
+    -webkit-mask-image:radial-gradient(ellipse 62% 70% at 50% 52%, #000 25%, transparent 82%);
+            mask-image:radial-gradient(ellipse 62% 70% at 50% 52%, #000 25%, transparent 82%);
   }
-  .badge-disc b{display:block;color:var(--accent);font:800 16px var(--head)}
-  .mosaic-wrap{position:relative}
+  .hx-stage{position:absolute;left:50%;top:50%;width:1280px;height:800px;margin:-400px 0 0 -640px;transform:scale(var(--s,1));transform-origin:50% 50%}
+
+  .hx-eyebrow{position:absolute;left:0;top:44px;width:1280px;margin:0;text-align:center;font:600 11px/1 var(--body);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:var(--accent)}
+  .hx-title{position:absolute;left:0;top:0;width:1280px;margin:0;font:800 54px/58px var(--head);letter-spacing:-.012em;text-align:center;text-transform:uppercase;color:var(--ink)}
+  .hx-title span{position:absolute;left:0;width:1280px;display:block;white-space:nowrap}
+  .hx-title .l1{top:72px}.hx-title .l2{top:130px}.hx-title .l3{top:188px}.hx-title .l4{top:246px;color:var(--accent)}
+
+  .hx-house{position:absolute;left:450px;top:318px;width:380px;height:216px;overflow:visible}
+
+  .hx-pick{position:absolute;left:0;top:548px;width:1280px;display:flex;justify-content:center;gap:10px}
+  .hp{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--body);text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 18px;transition:border-color .2s,color .2s,background .2s}
+  .hp svg{width:18px;height:18px;flex:none}
+  .hp:hover{border-color:var(--accent);color:var(--accent)}
+  .hp.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  .hx-plumb{position:absolute;left:628px;top:612px;width:24px;height:122px;overflow:visible}
+
+  .hx-f{position:absolute;top:0}
+  .hx-fl{right:708px;text-align:right}
+  .hx-fr{left:708px;text-align:left}
+  .hx-f .ic{position:absolute;top:614px;width:40px;height:40px;display:block}
+  .hx-fl .ic{right:-2px}
+  .hx-fr .ic{left:-2px}
+  .hx-f h2{position:absolute;top:668px;margin:0;font:800 19px/22px var(--head);letter-spacing:.01em;text-transform:uppercase;color:var(--ink)}
+  .hx-f p{position:absolute;top:722px;margin:0;font:400 15px/21px var(--body);color:var(--ink-2)}
+  .hx-fl h2,.hx-fl p{right:0}
+  .hx-fr h2,.hx-fr p{left:0}
+  .hx-f h2 span,.hx-f p span{position:relative;display:block;white-space:nowrap}
+
+  /* дом */
+  .hx-house .bp{display:none}
+  .hx-house .t-box{transform-box:fill-box;transform-origin:50% 100%}
+  .hx-house .t-pop{transform-box:fill-box;transform-origin:50% 50%}
+  .hx-plumb .cord{transform-box:fill-box;transform-origin:50% 0}
+  .hx-plumb .bob{transform-box:view-box;transform-origin:12px 0}
+
+  /* ===== вступительная анимация: один раз, затем всё неподвижно ===== */
+  @media (prefers-reduced-motion:no-preference){
+    .hx-eyebrow{animation:riseIn .55s cubic-bezier(.33,.9,.35,1) .15s both}
+    .hx-title span{animation:lineIn .9s cubic-bezier(.16,1,.3,1) both}
+    .hx-title .l1{animation-delay:.28s}.hx-title .l2{animation-delay:.37s}.hx-title .l3{animation-delay:.46s}.hx-title .l4{animation-delay:.55s}
+
+    /* 1. чертёж */
+    .hx-house .bp{display:inline;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .9s cubic-bezier(.45,0,.2,1) .2s forwards, bpOut .6s ease 2.35s forwards}
+    /* 2. земля, тень, фундамент */
+    .hx-house .ground{stroke-dasharray:1;stroke-dashoffset:1;animation:drawIn .55s ease .55s both}
+    .hx-house .shadow{animation:fadeIn .6s ease .9s both}
+    .hx-house .found{animation:grow .3s cubic-bezier(.2,.9,.3,1) .85s both}
+    /* 3. сруб: брёвна ложатся по одному снизу вверх */
+    .hx-house .log{animation:logIn .38s cubic-bezier(.2,.9,.3,1.15) both}
+    .hx-house .log:nth-child(1){animation-delay:1.05s}
+    .hx-house .log:nth-child(2){animation-delay:1.14s}
+    .hx-house .log:nth-child(3){animation-delay:1.23s}
+    .hx-house .log:nth-child(4){animation-delay:1.32s}
+    .hx-house .log:nth-child(5){animation-delay:1.41s}
+    .hx-house .log:nth-child(6){animation-delay:1.50s}
+    .hx-house .log:nth-child(7){animation-delay:1.59s}
+    /* 4. фронтон, дымоход, крыша */
+    .hx-house .gable{animation:grow .35s cubic-bezier(.2,.9,.3,1) 1.78s both}
+    .hx-house .chimney{animation:grow .3s cubic-bezier(.2,.9,.3,1) 1.98s both}
+    .hx-house .roof{stroke-dasharray:1;stroke-dashoffset:1;animation:drawIn .45s cubic-bezier(.45,0,.2,1) 2.02s both}
+    /* 5. дверь и окна */
+    .hx-house .door{animation:grow .3s cubic-bezier(.2,.9,.3,1) 2.3s both}
+    .hx-house .win1{animation:pop .35s cubic-bezier(.2,.9,.3,1.3) 2.38s both}
+    .hx-house .win2{animation:pop .35s cubic-bezier(.2,.9,.3,1.3) 2.46s both}
+    .hx-house .win3{animation:pop .35s cubic-bezier(.2,.9,.3,1.3) 2.54s both}
+
+    .hx-pick{animation:riseIn .6s cubic-bezier(.33,.9,.35,1) 2.6s both}
+    .hx-plumb .cord{animation:growDown .45s cubic-bezier(.45,0,.2,1) 2.7s both}
+    .hx-plumb .bob{animation:settle 1s cubic-bezier(.3,.7,.3,1) 2.9s both}
+    .hx-fl{animation:blockInL .75s cubic-bezier(.16,1,.3,1) 2.8s both}
+    .hx-fr{animation:blockInR .75s cubic-bezier(.16,1,.3,1) 2.88s both}
+
+    @keyframes riseIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes lineIn{
+      0%{opacity:0;transform:translateY(.26em);clip-path:inset(100% -30% 0% -30%)}
+      35%{opacity:1}
+      90%{clip-path:inset(0% -30% -100% -30%)}
+      100%{opacity:1;transform:none;clip-path:inset(-80% -30% -100% -30%)}
+    }
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes drawIn{0%{opacity:0;stroke-dashoffset:1}1%{opacity:1}100%{opacity:1;stroke-dashoffset:0}}
+    @keyframes bpOut{to{opacity:0}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes grow{from{opacity:0;transform:scaleY(0)}to{opacity:1;transform:none}}
+    @keyframes growDown{from{transform:scaleY(0)}to{transform:none}}
+    @keyframes logIn{from{opacity:0;transform:translateY(-26px)}to{opacity:1;transform:none}}
+    @keyframes pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+    @keyframes settle{0%{opacity:0;transform:translateY(-14px) rotate(7deg)}30%{opacity:1}55%{transform:rotate(-4deg)}80%{transform:rotate(1.5deg)}100%{opacity:1;transform:none}}
+    @keyframes blockInL{from{opacity:0;transform:translate(-12px,8px)}to{opacity:1;transform:none}}
+    @keyframes blockInR{from{opacity:0;transform:translate(12px,8px)}to{opacity:1;transform:none}}
+  }
+
+  /* планшет в портретной ориентации: сетка с осью-отвесом между блоками */
+  @media (min-width:610px) and (max-aspect-ratio:1/1){
+    :root{--u:min(100vw / 768, 100vh / 1024)}
+    .hx{height:auto;min-height:calc(100svh - var(--chrome))}
+    .hx-stage{position:relative;left:auto;top:auto;width:auto;height:auto;min-height:inherit;margin:0;transform:none;
+      display:grid;grid-template-columns:1fr calc(120 * var(--u)) 1fr;grid-template-rows:auto auto 1fr auto auto minmax(0,.38fr);
+      padding:calc(46 * var(--u)) clamp(24px,5.2vw,72px) calc(24 * var(--u))}
+    .hx-eyebrow,.hx-title,.hx-title span,.hx-house,.hx-pick,.hx-plumb,.hx-f,.hx-f h2,.hx-f p,.hx-f .ic{position:static;width:auto}
+    .hx-eyebrow{grid-area:1/1/2/-1;font-size:calc(13 * var(--u));margin-bottom:calc(20 * var(--u))}
+    .hx-title{grid-area:2/1/3/-1;font-size:calc(52 * var(--u));line-height:1.06}
+    .hx-title span{white-space:normal}
+    .hx-house{grid-area:3/1/4/-1;justify-self:center;align-self:center;width:min(100%, calc(520 * var(--u)));height:auto;margin:calc(24 * var(--u)) 0}
+    .hx-pick{grid-area:4/1/5/-1;margin-bottom:calc(28 * var(--u))}
+    .hx-plumb{grid-area:5/2/6/3;justify-self:center;width:calc(24 * var(--u));height:calc(150 * var(--u))}
+    .hx-fl{grid-area:5/1/6/2}
+    .hx-fr{grid-area:5/3/6/4}
+    .hx-f .ic{width:calc(44 * var(--u));height:calc(44 * var(--u));margin-bottom:calc(14 * var(--u))}
+    .hx-fl .ic{margin-left:auto;margin-right:calc(-2 * var(--u))}
+    .hx-fr .ic{margin-right:auto;margin-left:calc(-2 * var(--u))}
+    .hx-f h2{font-size:calc(22 * var(--u));line-height:1.1;margin-bottom:calc(12 * var(--u))}
+    .hx-f h2 span{white-space:normal}
+    .hx-f p{font-size:calc(16 * var(--u));line-height:1.4;max-width:calc(300 * var(--u))}
+    .hx-f p span{display:inline;white-space:normal}
+    .hx-fl p{margin-left:auto}
+    .hx-fr p{margin-right:auto}
+  }
+
+  /* телефоны: блоки по очереди, но зеркально — левый к правому краю, правый к левому */
+  @media (max-width:609px){
+    :root{--u:min(100vw / 390, 100vh / 780)}
+    .hx{height:auto;min-height:calc(100svh - var(--chrome))}
+    .hx::before{background-size:96px 96px,96px 96px,24px 24px,24px 24px}
+    .hx-stage{position:relative;left:auto;top:auto;width:auto;height:auto;min-height:inherit;margin:0;transform:none;
+      display:grid;grid-template-columns:100%;grid-template-rows:auto auto 1fr auto auto auto minmax(0,.3fr);
+      padding:calc(28 * var(--u)) max(calc(20 * var(--u)), env(safe-area-inset-right)) max(calc(32 * var(--u)), env(safe-area-inset-bottom)) max(calc(20 * var(--u)), env(safe-area-inset-left))}
+    .hx-eyebrow,.hx-title,.hx-title span,.hx-house,.hx-pick,.hx-f,.hx-f h2,.hx-f p,.hx-f .ic{position:static;width:auto}
+    .hx-plumb{display:none}
+    .hx-eyebrow{font-size:clamp(9.5px, calc(11 * var(--u)), 12px);margin-bottom:calc(14 * var(--u))}
+    .hx-title{font-size:clamp(21px, calc(27.5 * var(--u)), 36px);line-height:1.08}
+    .hx-title span{white-space:normal}
+    .hx-house{justify-self:center;align-self:center;width:100%;max-width:420px;height:auto;margin:calc(18 * var(--u)) 0 calc(14 * var(--u))}
+    .hx-pick{gap:8px;margin-bottom:calc(30 * var(--u))}
+    .hp{flex:1 1 0;justify-content:center;padding:12px 6px;font-size:15px;min-height:46px}
+    .hx-fl{margin-bottom:calc(24 * var(--u))}
+    .hx-f .ic{width:clamp(30px, calc(38 * var(--u)), 44px);height:clamp(30px, calc(38 * var(--u)), 44px);margin-bottom:calc(10 * var(--u))}
+    .hx-fl .ic{margin-left:auto;margin-right:calc(-2 * var(--u))}
+    .hx-fr .ic{margin-right:auto;margin-left:calc(-2 * var(--u))}
+    .hx-f h2{font-size:clamp(16px, calc(18 * var(--u)), 20px);line-height:1.1;margin-bottom:calc(8 * var(--u))}
+    .hx-f h2 span{white-space:normal}
+    .hx-f p{font-size:clamp(14px, calc(15 * var(--u)), 16px);line-height:1.42;max-width:calc(320 * var(--u))}
+    .hx-f p span{display:inline;white-space:normal}
+    .hx-fl p{margin-left:auto}
+    .hx-fr p{margin-right:auto}
+  }
 
   /* появление */
-  .fade{opacity:0;transform:translateY(14px);animation:fade .8s cubic-bezier(.2,.8,.2,1) forwards}
-  .f1{animation-delay:.05s}.f2{animation-delay:.12s}.f3{animation-delay:.2s}.f4{animation-delay:.28s}.f5{animation-delay:.36s}.f6{animation-delay:.3s}
-  @keyframes fade{to{opacity:1;transform:none}}
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
@@ -275,8 +407,7 @@
     .nav{display:none}
   }
   @media (max-width:880px){
-    .hero .wrap,.recog,.final__box{grid-template-columns:1fr}
-    .mosaic{aspect-ratio:4/3;max-width:560px}
+    .recog,.final__box{grid-template-columns:1fr}
     .grid{grid-template-columns:repeat(2,1fr)}
     .values,.feel{grid-template-columns:1fr 1fr}
     .jobs,.rivals{grid-template-columns:1fr}
@@ -295,16 +426,6 @@
     .logo__sub,.call__hours{display:none}
     .logo__name{font-size:19px}
     .call__num{font-size:15.5px}
-    .hero{padding:28px 0 48px}
-    .hero h1{margin:16px 0 14px}
-    .micro{margin:20px 0 24px;gap:10px}
-    .pick{gap:8px}
-    .pick .btn{flex-direction:column;gap:6px;padding:14px 6px;border-radius:16px;font-size:15px}
-    .pick .btn svg{width:22px;height:22px}
-    .mosaic{aspect-ratio:4/3;gap:8px}
-    .mosaic figcaption{font-size:12px;padding:4px 8px;left:8px;bottom:8px}
-    .badge-disc{right:8px;top:8px;font-size:12px;padding:8px 10px}
-    .badge-disc b{font-size:14px}
     .sec{padding:56px 0}
     .sec-head p{font-size:16px}
     .controls{gap:12px}
@@ -336,11 +457,158 @@
     .call__num .call__text{display:none}
     .call__num{width:42px;height:42px;border-radius:50%;background:var(--accent);justify-content:center}
     .call__num svg{color:#fff;width:19px;height:19px}
-    .pick .btn{font-size:14px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
-    .reveal,.fade{opacity:1;transform:none}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* ================= СТИЛЬ v3: выразительнее, глубже, но спокойно ================= */
+  :root{
+    --bg:#F5F3EE;
+    --ink:#15191B;
+    --ink-2:#4A4F55;
+    --muted:#868A90;
+    --line:rgba(21,25,27,.09);
+    --dark:#17211D;
+    --radius:20px;
+    --radius-s:14px;
+    --shadow-sm:0 1px 1px rgba(21,25,27,.04), 0 2px 8px -2px rgba(21,25,27,.08);
+    --shadow:0 1px 2px rgba(21,25,27,.05), 0 12px 28px -12px rgba(21,25,27,.16), 0 34px 70px -34px rgba(21,25,27,.2);
+    --shadow-lg:0 2px 4px rgba(21,25,27,.05), 0 24px 50px -18px rgba(21,25,27,.24), 0 70px 120px -50px rgba(21,25,27,.3);
+    --head:"Wix Madefor Display", system-ui, sans-serif;
+    --body:"Wix Madefor Text", system-ui, sans-serif;
+  }
+  body{font-size:16.5px;color:var(--ink);background:var(--bg)}
+  h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.06}
+  h2{font-size:clamp(32px,4.4vw,54px);font-weight:600;letter-spacing:-.04em}
+  h3{letter-spacing:-.02em}
+
+  /* кнопки — тёмные «пилюли» с объёмом */
+  .btn{background:linear-gradient(180deg,#26332D,var(--dark));color:#fff;font-weight:600;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 1px 2px rgba(21,25,27,.2), 0 8px 18px -8px rgba(21,25,27,.55);
+    transition:transform .2s, box-shadow .2s, background .2s, color .2s, border-color .2s}
+  .btn:hover{background:linear-gradient(180deg,#2E3D36,#1B2721);transform:translateY(-1px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 2px 4px rgba(21,25,27,.2), 0 14px 26px -10px rgba(21,25,27,.55)}
+  .btn--ghost{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .btn--ghost:hover{background:#fff;color:var(--ink);border-color:rgba(21,25,27,.18);box-shadow:var(--shadow)}
+
+  /* метки разделов */
+  .kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:6px 13px 6px 9px;border-radius:999px;
+    background:#fff;box-shadow:var(--shadow-sm);font:600 13px/1.2 var(--body);color:var(--ink-2);letter-spacing:0}
+  .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .result .kicker{background:rgba(255,255,255,.1);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.18)}
+  .result .kicker::before{background:#E9C38F;box-shadow:0 0 0 3px rgba(233,195,143,.2)}
+
+  /* плашка и стеклянная шапка */
+  .ribbon{background:var(--dark);font:500 13.5px/1.4 var(--body);letter-spacing:.01em}
+  .ribbon span{color:#E9C38F;opacity:1}
+  .header{background:rgba(245,243,238,.72);backdrop-filter:saturate(1.4) blur(16px);-webkit-backdrop-filter:saturate(1.4) blur(16px);border-bottom:1px solid var(--line)}
+  .nav{gap:6px}
+  .nav a{padding:8px 14px;border-radius:999px;font:500 15px var(--body);color:var(--ink-2);transition:background .2s,color .2s}
+  .nav a:hover{background:rgba(21,25,27,.05);color:var(--ink)}
+  .call{flex-direction:row-reverse;align-items:center;gap:14px}
+  .call__num{font:600 15.5px/1 var(--body);color:#fff;padding:12px 18px;border-radius:999px;background:linear-gradient(180deg,#26332D,var(--dark));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 8px 18px -8px rgba(21,25,27,.55);transition:transform .2s}
+  .call__num svg{color:#E9C38F}
+  .call:hover .call__num{color:#fff;transform:translateY(-1px)}
+  .call__hours{margin:0;text-align:right;font-size:12.5px;line-height:1.35;white-space:nowrap}
+
+  /* логотип-словознак */
+  .logo{gap:10px}
+  .logo__mark{filter:drop-shadow(0 4px 6px rgba(46,94,78,.25))}
+  .logo__name{display:flex;align-items:flex-end;font:800 27px/.9 var(--head);letter-spacing:-.055em;color:var(--ink)}
+  .logo__name b{font-weight:inherit;color:var(--accent)}
+  .logo__name i{display:block;width:7px;height:7px;margin:0 0 3px 3px;border-radius:2px;background:#C9874F;transform:rotate(-8deg);box-shadow:0 2px 4px rgba(181,112,63,.4)}
+  .logo__sub{font:600 9.5px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+  /* ---------- первый экран ---------- */
+  .hx{background:
+      radial-gradient(42% 48% at 12% 18%, rgba(201,135,79,.11), transparent 70%),
+      radial-gradient(40% 50% at 88% 26%, rgba(46,94,78,.10), transparent 70%),
+      linear-gradient(180deg,#FAF8F4 0%, #F2EFE8 100%)}
+  .hx::before{opacity:.7}
+  .hx::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .35 0 0 0 0 .3 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hx-disc{position:absolute;left:380px;top:170px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle at 50% 35%, #FFFFFF 0%, #FBFAF7 45%, #EFEBE3 100%);
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.9), inset 0 -24px 50px rgba(120,100,70,.08), 0 50px 90px -40px rgba(70,55,35,.35), 0 0 0 1px rgba(21,25,27,.03)}
+  .hx-eyebrow{top:30px;letter-spacing:0;text-indent:0;text-transform:none}
+  .hx-eyebrow .pill{display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:999px;background:rgba(255,255,255,.85);
+    box-shadow:var(--shadow-sm);font:500 13.5px/1.2 var(--body);color:var(--ink-2)}
+  .hx-eyebrow .pill b{font-weight:600;color:#fff;background:var(--dark);padding:5px 10px;border-radius:999px;font-size:12px}
+  .hx-title{font:650 66px/68px var(--head);letter-spacing:-.045em;text-transform:none;color:var(--ink)}
+  .hx-title .l1{top:78px}.hx-title .l2{top:146px}.hx-title .l3{top:214px}
+  .hx-title em{font-style:normal;background:linear-gradient(100deg,#2E5E4E 10%,#5E8E72 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hx-house{top:322px;filter:drop-shadow(0 26px 22px rgba(70,50,25,.16))}
+  .hp{background:rgba(255,255,255,.9);border-color:var(--line);box-shadow:var(--shadow-sm);font-weight:600}
+  .hp:hover{border-color:rgba(21,25,27,.18);color:var(--ink);box-shadow:var(--shadow)}
+  .hp.is-active{background:linear-gradient(180deg,#26332D,var(--dark));border-color:var(--dark);color:#fff}
+  .hx-f h2{font:650 21px/24px var(--head);letter-spacing:-.025em;text-transform:none}
+  .hx-f p{color:var(--ink-2)}
+
+
+  @media (prefers-reduced-motion:no-preference){
+    .hx-disc{animation:discIn 1s cubic-bezier(.2,.8,.2,1) .05s both}
+    @keyframes discIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+  }
+
+  /* ---------- каталог и карточки ---------- */
+  .seg{background:#fff;border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .seg button[aria-pressed="true"]{background:linear-gradient(180deg,#26332D,var(--dark));box-shadow:0 4px 10px -4px rgba(21,25,27,.5)}
+  .chips button{background:rgba(255,255,255,.6)}
+  .chips button[aria-pressed="true"]{background:var(--dark);border-color:var(--dark)}
+  .card{border-color:var(--line);box-shadow:var(--shadow-sm);border-radius:var(--radius)}
+  .card__img img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  @media (hover:hover){
+    .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+    .card:hover .card__img img{transform:scale(1.05)}
+  }
+  .card h3{font-weight:650}
+  .card__cat{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(255,255,255,.82);box-shadow:var(--shadow-sm)}
+  .price.open .price__btn{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .price__box{background:linear-gradient(180deg,#EEF4F1,#E3ECE8)}
+  .notfound{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+
+  /* ---------- выгоды, задачи, вопросы ---------- */
+  .value{border-color:var(--line);box-shadow:var(--shadow-sm);transition:transform .3s, box-shadow .3s}
+  @media (hover:hover){ .value:hover{transform:translateY(-3px);box-shadow:var(--shadow)} }
+  .value--accent{background:radial-gradient(120% 90% at 0% 0%, #3C7360 0%, #2E5E4E 45%, #1F4236 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12), var(--shadow)}
+  .value__icon{border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+  .pains li{border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .job,.rival,.faq details{border-color:var(--line);box-shadow:var(--shadow-sm)}
+  .faq details[open]{box-shadow:var(--shadow)}
+  .result{background:radial-gradient(70% 90% at 85% 0%, rgba(233,195,143,.16), transparent 60%), linear-gradient(160deg,#2B5A4A,#1C3A30)}
+  .feel__item{background:rgba(255,255,255,.06);backdrop-filter:blur(6px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+  .final__box{box-shadow:var(--shadow-lg);border-color:var(--line);background:
+    radial-gradient(60% 80% at 100% 0%, rgba(201,135,79,.10), transparent 60%), #fff}
+  .final__card{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+  .callbar .btn{box-shadow:0 14px 34px -10px rgba(21,25,27,.6)}
+
+  /* ---------- адаптив ---------- */
+  @media (min-width:610px) and (max-aspect-ratio:1/1){
+    .hx-disc{display:none}
+    .hx-house{background:radial-gradient(closest-side,#fff,rgba(255,255,255,0))}
+    .hx-eyebrow{font-size:inherit}
+    .hx-title{font-size:calc(56 * var(--u));line-height:1.04}
+  }
+  @media (max-width:1060px){ .call__hours{display:none} }
+  @media (max-width:609px){
+    .hx-disc{display:none}
+    .hx-house{background:radial-gradient(closest-side,#fff 30%,rgba(255,255,255,0))}
+    .hx-eyebrow .pill{font-size:12.5px}
+    .hx-title{font-size:clamp(26px, calc(31 * var(--u)), 38px);line-height:1.08}
+    .hx-title span{display:inline;animation:none!important;clip-path:none!important}
+    .hx-title{animation:riseIn .8s cubic-bezier(.33,.9,.35,1) .25s both}
+    .hx-title .l3{display:block;margin-top:2px}
+    .hx-f h2{font-size:clamp(17px, calc(19 * var(--u)), 21px);line-height:1.15}
+    .logo__name{font-size:24px}
+    .call__num{padding:11px 14px;font-size:14.5px}
+    .kicker{margin-bottom:14px}
+  }
+  @media (max-width:360px){
+    .call__num{padding:0;width:42px;height:42px;justify-content:center;background:linear-gradient(180deg,#26332D,var(--dark))}
   }
 </style>
 </head>
@@ -373,7 +641,7 @@
         <rect class="pane" x="16.6" y="27.4" width="5" height="5" rx="1" fill="#fff"/>
         <rect class="pane pane-b" x="22.4" y="27.4" width="5" height="5" rx="1" fill="#E9D9B8"/>
       </svg>
-      <span><span class="logo__name">МИКС</span><span class="logo__sub">магазин стройматериалов</span></span>
+      <span><span class="logo__name">Ми<b>кс</b><i></i></span><span class="logo__sub">стройматериалы</span></span>
     </a>
     <nav class="nav" aria-label="Разделы">
       <a href="#catalog">Каталог</a>
@@ -382,43 +650,139 @@
     </nav>
     <a class="call" href="tel:+79519459239" data-event="tel_header">
       <span class="call__num" aria-label="Позвонить: +7 (951) 945-92-39"><svg><use href="#i-phone"/></svg><span class="call__text">+7 (951) 945-92-39</span></span>
-      <span class="call__hours">Пн–Сб 9:00–19:00, Вс 10:00–17:00</span>
+      <span class="call__hours">Пн–Сб 9:00–19:00<br>Вс 10:00–17:00</span>
     </a>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <span class="eyebrow fade f1">Низкие цены и скидка за большой объём</span>
-        <h1 class="fade f2">Подберите материал для своего объекта и не купите лишнего</h1>
-        <p class="hero__lead fade f3">Каталог «Микс» с подсказками «для чего подходит» у каждого товара. Выбрали — нажмите на номер и узнайте цену за пару минут.</p>
-        <ul class="micro fade f4">
-          <li>Найти материалы для своего объекта: дома, дачи или квартиры</li>
-          <li>Понять, подходит ли выбранный материал именно под ваш случай</li>
-          <li>Узнать цену и получить консультацию у продавца</li>
-        </ul>
-        <div class="fade f5">
-          <div class="pick__label">Что строите или ремонтируете?</div>
-          <div class="pick">
-            <a href="#catalog" class="btn btn--ghost" data-pick="house" data-event="pick_house"><svg><use href="#i-house"/></svg>Дом</a>
-            <a href="#catalog" class="btn btn--ghost" data-pick="dacha" data-event="pick_dacha"><svg><use href="#i-dacha"/></svg>Дача</a>
-            <a href="#catalog" class="btn btn--ghost" data-pick="flat" data-event="pick_flat"><svg><use href="#i-flat"/></svg>Квартира</a>
-          </div>
-        </div>
-      </div>
+  <!-- HERO: дом строится от чертежа до готового -->
+  <section class="hx" aria-label="Микс — подбор стройматериалов">
+    <div class="hx-stage">
+      <div class="hx-disc" aria-hidden="true"></div>
+      <p class="hx-eyebrow"><span class="pill"><b>Выгодно</b>Низкие цены и скидка за большой объём</span></p>
+      <h1 class="hx-title">
+        <span class="l1">От фундамента до крыши&nbsp;—</span>
+        <span class="l2">всё для стройки и ремонта</span>
+        <span class="l3"><em>в одном месте</em></span>
+      </h1>
 
-      <div class="mosaic-wrap fade f6">
-        <div class="badge-disc"><b>−% за объём</b>чем больше берёте — тем выгоднее</div>
-        <div class="mosaic">
-          <figure><img src="img/house.jpg" alt="Дом из клеёного бруса" loading="eager"><figcaption>Брус для дома</figcaption></figure>
-          <figure><img src="img/terrace.jpg" alt="Образцы террасной доски разных оттенков"><figcaption>Террасная доска</figcaption></figure>
-          <figure><img src="img/ecover.jpg" alt="Утеплитель из минеральной ваты: плиты и рулоны"><figcaption>Утеплитель</figcaption></figure>
-        </div>
-      </div>
+      <svg class="hx-house" viewBox="0 0 380 216" fill="none" role="img" aria-label="Дом из бруса строится: чертёж, фундамент, сруб, крыша и окна">
+        <defs>
+          <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#E4B67E"/>
+            <stop offset="1" stop-color="#C68B50"/>
+          </linearGradient>
+          <clipPath id="gableClip"><polygon points="110,96 190,51 270,96"/></clipPath>
+        </defs>
+
+        <ellipse class="shadow" cx="190" cy="198" rx="158" ry="7" fill="rgba(35,38,42,.08)"/>
+        <path class="ground" pathLength="1" d="M24 194 H356" stroke="#CFCAC1" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- фундамент -->
+        <rect class="found t-box" x="96" y="178" width="188" height="16" rx="2" fill="#BDB7AD"/>
+
+        <!-- сруб: 7 брёвен с выпусками по углам -->
+        <g class="logs">
+          <g class="log t-box"><rect x="104" y="167" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="172.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="172.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="156" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="161.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="161.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="145" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="150.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="150.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="134" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="139.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="139.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="123" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="128.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="128.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="112" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="117.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="117.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+          <g class="log t-box"><rect x="104" y="101" width="172" height="11" rx="5.5" fill="url(#wood)"/><circle cx="102" cy="106.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/><circle cx="278" cy="106.5" r="5.5" fill="#EBC793" stroke="#B9824F" stroke-width="1.2"/></g>
+        </g>
+
+        <!-- фронтон из вагонки -->
+        <g class="gable t-box">
+          <polygon points="110,101 190,56 270,101" fill="#EDD3AA"/>
+          <g clip-path="url(#gableClip)" stroke="#D4AE78" stroke-width="1.2" transform="translate(0 5)">
+            <path d="M130 50V100M150 50V100M170 50V100M210 50V100M230 50V100M250 50V100"/>
+          </g>
+          <circle cx="190" cy="82" r="7.5" fill="#fff" stroke="#2E5E4E" stroke-width="2.2"/>
+        </g>
+
+        <!-- дымоход -->
+        <g class="chimney t-box">
+          <rect x="228" y="44" width="16" height="36" rx="1.5" fill="#B5703F"/>
+          <rect x="225" y="40" width="22" height="6" rx="1.5" fill="#8F5530"/>
+        </g>
+
+        <!-- крыша — как в логотипе -->
+        <path class="roof" pathLength="1" d="M86 106 L190 47 L294 106" stroke="#2E5E4E" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- дверь и окна (створки разных тонов — «микс») -->
+        <g class="door t-box">
+          <rect x="175" y="128" width="30" height="50" rx="3" fill="#2E5E4E"/>
+          <circle cx="199" cy="155" r="2" fill="#E9D9B8"/>
+        </g>
+        <g class="win1 t-pop">
+          <rect x="120" y="117" width="40" height="34" rx="3" fill="#2E5E4E"/>
+          <rect x="123" y="120" width="15.5" height="12.5" rx="1" fill="#C9874F"/>
+          <rect x="141.5" y="120" width="15.5" height="12.5" rx="1" fill="#fff"/>
+          <rect x="123" y="135.5" width="15.5" height="12.5" rx="1" fill="#fff"/>
+          <rect x="141.5" y="135.5" width="15.5" height="12.5" rx="1" fill="#E9D9B8"/>
+        </g>
+        <g class="win2 t-pop">
+          <rect x="220" y="117" width="40" height="34" rx="3" fill="#2E5E4E"/>
+          <rect x="223" y="120" width="15.5" height="12.5" rx="1" fill="#E9D9B8"/>
+          <rect x="241.5" y="120" width="15.5" height="12.5" rx="1" fill="#fff"/>
+          <rect x="223" y="135.5" width="15.5" height="12.5" rx="1" fill="#fff"/>
+          <rect x="241.5" y="135.5" width="15.5" height="12.5" rx="1" fill="#C9874F"/>
+        </g>
+        <g class="win3 t-pop"><circle cx="190" cy="82" r="3" fill="#C9874F"/></g>
+
+        <!-- чертёж: рисуется первым и растворяется, когда дом готов -->
+        <path class="bp" pathLength="1" stroke="#2E5E4E" stroke-width="1.2" stroke-linejoin="round" opacity=".55"
+          d="M104 178 V101 H276 V178 Z M86 106 L190 47 L294 106 M228 72 V44 H244 V80 M120 117 h40 v34 h-40 Z M220 117 h40 v34 h-40 Z M175 178 V128 h30 V178 M104 208 H276 M104 203 V213 M276 203 V213"/>
+      </svg>
+
+
+
+      <nav class="hx-pick" aria-label="Подбор по объекту">
+        <a href="#catalog" class="hp" data-pick="house" data-event="pick_house"><svg><use href="#i-house"/></svg>Дом</a>
+        <a href="#catalog" class="hp" data-pick="dacha" data-event="pick_dacha"><svg><use href="#i-dacha"/></svg>Дача</a>
+        <a href="#catalog" class="hp" data-pick="flat" data-event="pick_flat"><svg><use href="#i-flat"/></svg>Квартира</a>
+      </nav>
+
+      <!-- отвес на оси между блоками -->
+      <svg class="hx-plumb" viewBox="0 0 24 122" fill="none" aria-hidden="true">
+        <path class="cord" d="M12 0 V96" stroke="#B5703F" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <g class="bob">
+          <rect x="9" y="94" width="6" height="5" rx="1" fill="#8F5530"/>
+          <path d="M5.5 99 H18.5 L12 120 Z" fill="#B5703F"/>
+        </g>
+      </svg>
+
+      <section class="hx-f hx-fl">
+        <svg class="ic" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" stroke="#2E5E4E" stroke-width="1.8" stroke-dasharray="3.6 3"/>
+          <circle cx="20" cy="20" r="11.5" fill="#2E5E4E"/>
+          <path d="M14.3 20.6 20 15.6l5.7 5V26.5H14.3z" fill="#fff"/>
+          <rect x="18.6" y="22.2" width="2.8" height="4.3" fill="#2E5E4E"/>
+        </svg>
+        <h2><span>Подбор под</span><span>ваш объект</span></h2>
+        <p><span>Дом, дача или квартира — в каждой </span><span>карточке написано, для чего подходит </span><span>материал. Без ошибок и переделок.</span></p>
+      </section>
+
+      <section class="hx-f hx-fr">
+        <svg class="ic" viewBox="0 0 35 38" fill="none" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="17" height="9.6" rx="0.5" fill="#2E5E4E"/>
+          <rect x="10.5" y="13.5" width="13.5" height="10.9" rx="0.5" fill="#C9874F"/>
+          <rect x="17.5" y="28.3" width="17" height="9.7" rx="0.5" fill="#2E5E4E"/>
+          <g fill="#F6F5F2">
+            <rect x="2.5" y="2.5" width="1.1" height="1.9"/><rect x="5.6" y="2.5" width="1.1" height="1.9"/><rect x="8.7" y="2.5" width="1.1" height="1.9"/><rect x="11.8" y="2.5" width="1.1" height="1.9"/><rect x="14.9" y="2.5" width="1.1" height="1.9"/>
+            <rect x="2.5" y="6.5" width="1.1" height="1.9"/><rect x="5.6" y="6.5" width="1.1" height="1.9"/><rect x="8.7" y="6.5" width="1.1" height="1.9"/><rect x="11.8" y="6.5" width="1.1" height="1.9"/><rect x="14.9" y="6.5" width="1.1" height="1.9"/>
+            <rect x="12.5" y="15.2" width="1.1" height="1.9"/><rect x="15.6" y="15.2" width="1.1" height="1.9"/><rect x="18.7" y="15.2" width="1.1" height="1.9"/><rect x="21.8" y="15.2" width="1.1" height="1.9"/>
+            <rect x="12.5" y="20.4" width="1.1" height="1.9"/><rect x="15.6" y="20.4" width="1.1" height="1.9"/><rect x="18.7" y="20.4" width="1.1" height="1.9"/><rect x="21.8" y="20.4" width="1.1" height="1.9"/>
+            <rect x="19.5" y="30.3" width="1.1" height="1.9"/><rect x="22.6" y="30.3" width="1.1" height="1.9"/><rect x="25.7" y="30.3" width="1.1" height="1.9"/><rect x="28.8" y="30.3" width="1.1" height="1.9"/><rect x="31.9" y="30.3" width="1.1" height="1.9"/>
+            <rect x="19.5" y="34.4" width="1.1" height="1.9"/><rect x="22.6" y="34.4" width="1.1" height="1.9"/><rect x="25.7" y="34.4" width="1.1" height="1.9"/><rect x="28.8" y="34.4" width="1.1" height="1.9"/><rect x="31.9" y="34.4" width="1.1" height="1.9"/>
+          </g>
+        </svg>
+        <h2><span>Низкие цены</span><span>и скидка за объём</span></h2>
+        <p><span>Цену назовём по телефону за пару </span><span>минут, а при большой покупке </span><span>сразу посчитаем скидку.</span></p>
+      </section>
     </div>
   </section>
 
@@ -426,6 +790,7 @@
   <section class="sec sec--sand" id="catalog">
     <div class="wrap">
       <div class="sec-head reveal">
+        <span class="kicker">Каталог</span><br>
         <h2>Найдите свой материал за минуту</h2>
         <p>Выберите, что строите или ремонтируете, — подсветим подходящие материалы. Понравился товар — нажмите «Уточнить стоимость» и позвоните нам в одно касание.</p>
       </div>
@@ -459,7 +824,7 @@
   <!-- ВЫГОДЫ -->
   <section class="sec" id="benefits">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>Что вы получите с «Микс»</h2></div>
+      <div class="sec-head reveal"><span class="kicker">Выгоды</span><h2>Что вы получите с «Микс»</h2></div>
       <div class="values">
         <div class="value reveal"><div class="value__icon"><svg><use href="#i-grid"/></svg></div><h3>Весь ассортимент в одном месте</h3><p>Пиломатериалы, утеплители, сухие смеси, кровля и расходники разложены по понятным категориям.</p></div>
         <div class="value reveal"><div class="value__icon"><svg><use href="#i-check"/></svg></div><h3>Уверенность, что материал подходит вам</h3><p>В каждой карточке указано, для какого объекта он предназначен, и перечислены главные преимущества простым языком.</p></div>
@@ -474,7 +839,7 @@
   <!-- УЗНАЁТЕ СЕБЯ -->
   <section class="sec sec--sand">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>Узнаёте себя?</h2><p>Отметьте, что про вас.</p></div>
+      <div class="sec-head reveal"><span class="kicker">Про вас</span><h2>Узнаёте себя?</h2><p>Отметьте, что про вас.</p></div>
       <div class="recog">
         <div class="reveal">
           <p class="recog__q">Вы хотите <mark>обустроить своё жильё качественно и без ошибок</mark>?</p>
@@ -502,7 +867,7 @@
   <!-- КАК РЕШИТЕ -->
   <section class="sec">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>Как вы решите свою задачу с «Микс»</h2></div>
+      <div class="sec-head reveal"><span class="kicker">Как это работает</span><h2>Как вы решите свою задачу с «Микс»</h2></div>
       <div class="jobs">
         <div class="job reveal">
           <span class="job__label">Задача 1</span>
@@ -531,7 +896,7 @@
   <!-- РЕЗУЛЬТАТ -->
   <section class="sec result">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>К чему вы придёте</h2></div>
+      <div class="sec-head reveal"><span class="kicker">Результат</span><h2>К чему вы придёте</h2></div>
       <div class="feel">
         <div class="feel__item reveal"><div class="feel__word">Уверенность</div><p>Материал выбран правильно и подходит вашему объекту.</p></div>
         <div class="feel__item reveal"><div class="feel__word">Спокойствие</div><p>Вы купили по низкой цене, со скидкой за объём, и переделывать ничего не придётся.</p></div>
@@ -548,7 +913,7 @@
   <!-- СОМНЕНИЯ -->
   <section class="sec" id="faq">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>У вас есть сомнения?</h2></div>
+      <div class="sec-head reveal"><span class="kicker">Вопросы</span><h2>У вас есть сомнения?</h2></div>
       <div class="faq">
         <details class="reveal" open>
           <summary>«На сайте нет цен — значит, дорого или будут навязывать»</summary>
@@ -569,7 +934,7 @@
   <!-- КОНКУРЕНТЫ -->
   <section class="sec sec--sand">
     <div class="wrap">
-      <div class="sec-head reveal"><h2>Почему «Микс», а не…</h2></div>
+      <div class="sec-head reveal"><span class="kicker">Сравнение</span><h2>Почему «Микс», а не…</h2></div>
       <div class="rivals">
         <article class="rival reveal">
           <h3>Крупные маркетплейсы и строительные гипермаркеты</h3>
@@ -654,33 +1019,45 @@
 
 <script>
 (function(){
+  // масштаб сцены первого экрана (1280×800) и высота шапки
+  var ribbonEl = document.querySelector('.ribbon'), headerEl = document.querySelector('.header'), root = document.documentElement;
+  function fitHero(){
+    var chrome = ribbonEl.offsetHeight + headerEl.offsetHeight;
+    root.style.setProperty('--chrome', chrome + 'px');
+    var h = window.innerHeight - chrome, w = root.clientWidth;
+    root.style.setProperty('--s', Math.min(Math.max(h, 540) / 800, w / 900).toFixed(4));
+  }
+  fitHero();
+  window.addEventListener('resize', fitHero);
+  window.addEventListener('orientationchange', fitHero);
+
   var PHONE = '+7 (951) 945-92-39', TEL = 'tel:+79519459239', HOURS = 'Пн–Сб 9:00–19:00, Вс 10:00–17:00';
 
   // Товары каталога: obj — для каких объектов подходит (house / dacha / flat)
   var CATALOG = [
-    {cat:'Пиломатериалы', title:'Террасная доска', img:'terrace.jpg', obj:['house','dacha'],
+    {cat:'Пиломатериалы', title:'Террасная доска', img:'img/terrace.jpg', obj:['house','dacha'],
       why:['Красивый настил для террасы, веранды и дорожек','Несколько оттенков под стиль дома','Монтаж своими руками за выходные']},
-    {cat:'Пиломатериалы', title:'Брус для дома (изба)', img:'house.jpg', obj:['house','dacha'],
+    {cat:'Пиломатериалы', title:'Брус для дома (изба)', img:'img/house.jpg', obj:['house','dacha'],
       why:['Тёплый дом — меньше расходов на отопление','Натуральное дерево: дом «дышит»','Подходит для постоянного проживания']},
-    {cat:'Пиломатериалы', title:'Вагонка', img:'lining.jpg', obj:['house','dacha','flat'],
+    {cat:'Пиломатериалы', title:'Вагонка', img:'img/lining.jpg', obj:['house','dacha','flat'],
       why:['Уютная деревянная отделка стен и потолков','Подходит для бани, балкона и мансарды','Простой монтаж в шип-паз']},
-    {cat:'Утеплители', title:'Утеплитель Эковер', img:'ecover.jpg', obj:['house','dacha','flat'],
+    {cat:'Утеплители', title:'Утеплитель Эковер', img:'img/ecover.jpg', obj:['house','dacha','flat'],
       why:['Тепло зимой и прохлада летом','Не горит — повышает пожарную безопасность','Заодно глушит шум с улицы и от соседей']},
-    {cat:'Сухие смеси', title:'Цемент и цементные смеси', img:'cement.jpg', obj:['house','dacha','flat'],
+    {cat:'Сухие смеси', title:'Цемент и цементные смеси', img:'img/cement.jpg', obj:['house','dacha','flat'],
       why:['Для фундамента, стяжки и кладки','Надёжная прочность на годы','Посчитаем нужное количество мешков']},
-    {cat:'Кровля', title:'Шифер', img:'slate.jpg', obj:['house','dacha'],
+    {cat:'Кровля', title:'Шифер', img:'img/slate.jpg', obj:['house','dacha'],
       why:['Выгодная кровля для дома, бани и построек','Не боится дождя и снега','Глушит шум дождя лучше металла']},
-    {cat:'Листовые материалы', title:'Гипсокартон', img:'drywall.jpg', obj:['house','dacha','flat'],
+    {cat:'Листовые материалы', title:'Гипсокартон', img:'img/drywall.jpg', obj:['house','dacha','flat'],
       why:['Ровные стены и потолки без мокрой штукатурки','Быстро монтируется','Легко спрятать проводку и трубы']},
-    {cat:'Стеновые материалы', title:'Кирпич', img:'brick.jpg', obj:['house','dacha'],
+    {cat:'Стеновые материалы', title:'Кирпич', img:'img/brick.jpg', obj:['house','dacha'],
       why:['Для стен, печей, заборов и цоколя','Долговечный и негорючий','Подберём под задачу и объём']},
-    {cat:'Расходники', title:'Монтажная пена', img:'foam.jpg', obj:['house','dacha','flat'],
+    {cat:'Расходники', title:'Монтажная пена', img:'img/foam.jpg', obj:['house','dacha','flat'],
       why:['Заполняет щели при установке окон и дверей','Утепляет и герметизирует швы','Бытовая и профессиональная — под пистолет']},
-    {cat:'Расходники', title:'Крепёж: саморезы и болты', img:'fasteners.jpg', obj:['house','dacha','flat'],
+    {cat:'Расходники', title:'Крепёж: саморезы и болты', img:'img/fasteners.jpg', obj:['house','dacha','flat'],
       why:['Всё для сборки: от каркаса до отделки','Подскажем размер под ваш материал','Выгоднее при покупке на весь объект']},
-    {cat:'Расходники', title:'Герметики', img:'sealant.jpg', obj:['house','dacha','flat'],
+    {cat:'Расходники', title:'Герметики', img:'img/sealant.jpg', obj:['house','dacha','flat'],
       why:['Для ванной, кухни, окон и кровли','Защищают швы от влаги и плесени','Бесцветные и белые — под задачу']},
-    {cat:'Расходники', title:'Краски и инструмент', img:'paint.jpg', obj:['house','dacha','flat'],
+    {cat:'Расходники', title:'Краски и инструмент', img:'img/paint.jpg', obj:['house','dacha','flat'],
       why:['Для стен, потолков, дерева и фасадов','Кисти, валики и всё для покраски','Поможем подобрать краску под поверхность']}
   ];
   var OBJ_NAMES = {house:'Дом', dacha:'Дача', flat:'Квартира'};
@@ -701,7 +1078,7 @@
   var grid = document.getElementById('grid');
   grid.innerHTML = CATALOG.map(function(p, i){
     return '<article class="card" data-i="' + i + '">' +
-      '<div class="card__img"><img src="img/' + p.img + '" alt="' + esc(p.title) + '" loading="lazy"><span class="card__cat">' + esc(p.cat) + '</span></div>' +
+      '<div class="card__img"><img src="' + p.img + '" referrerpolicy="no-referrer" alt="' + esc(p.title) + '" loading="lazy"><span class="card__cat">' + esc(p.cat) + '</span></div>' +
       '<div class="card__body">' +
         '<h3>' + esc(p.title) + '</h3>' +
         '<div class="fits">' + ['house','dacha','flat'].map(function(o){
