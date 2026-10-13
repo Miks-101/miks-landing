@@ -46,7 +46,7 @@
   h3{font-size:clamp(18px,1.8vw,21px);font-weight:700}
   p{margin:0}
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-  section{scroll-margin-top:72px}
+  section{scroll-margin-top:calc(var(--hdr, 72px) + 10px)}
 
   /* кнопки */
   .btn{
@@ -404,7 +404,6 @@
 
   @media (max-width:1060px){
     .grid{grid-template-columns:repeat(3,1fr)}
-    .nav{display:none}
   }
   @media (max-width:880px){
     .recog,.final__box{grid-template-columns:1fr}
@@ -610,6 +609,91 @@
   @media (max-width:360px){
     .call__num{padding:0;width:42px;height:42px;justify-content:center;background:linear-gradient(180deg,#26332D,var(--dark))}
   }
+
+  /* ================= v4.1: меню на телефоне, вид каталога, живой дом ================= */
+  /* меню: на планшете и телефоне — вторая строка закреплённой шапки */
+  .nav a.is-current{background:var(--dark);color:#fff}
+  @media (max-width:1060px){
+    .header .wrap{flex-wrap:wrap;row-gap:2px;padding-top:6px;padding-bottom:10px}
+    .nav{order:3;width:100%;gap:6px;padding:2px;border-radius:999px;background:rgba(21,25,27,.045)}
+    .nav a{flex:1;text-align:center;padding:9px 6px;font-size:14.5px;font-weight:600}
+    .nav a:hover{background:rgba(255,255,255,.7)}
+    .nav a.is-current{background:var(--dark);color:#fff;box-shadow:0 4px 10px -4px rgba(21,25,27,.5)}
+  }
+  @media (max-width:600px){
+    .header .wrap{min-height:56px;padding-bottom:8px}
+    .nav a{padding:8px 4px;font-size:14px}
+  }
+
+  /* вид каталога */
+  .catbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+  .catbar .status{margin:0}
+  .view{display:inline-flex;flex:none;gap:2px;padding:3px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  .view button{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;cursor:pointer;color:var(--ink-2);font:600 13.5px/1 var(--body);padding:8px 12px;border-radius:999px;transition:background .2s,color .2s}
+  .view button svg{width:16px;height:16px}
+  .view button[aria-pressed="true"]{background:var(--dark);color:#fff}
+  .card__cat{max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* список: фото слева, описание справа */
+  .grid.is-list{grid-template-columns:repeat(2,1fr)}
+  .grid.is-list .card{flex-direction:row}
+  .grid.is-list .card__img{flex:none;width:38%;aspect-ratio:auto}
+  .grid.is-list .card__img img{position:absolute;inset:0}
+  @media (max-width:880px){ .grid.is-list{grid-template-columns:1fr} }
+
+  @media (max-width:600px){
+    .catbar{align-items:flex-start}
+    .view button span{display:none}
+    .view button{padding:9px 11px}
+    /* плитка: 2 колонки, описание сохраняется */
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .card{border-radius:16px}
+    .card__img{aspect-ratio:1/1}
+    .card__cat{left:6px;top:6px;font-size:10.5px;padding:5px 7px}
+    .card__body{padding:10px 10px 12px;gap:8px}
+    .card h3{font-size:15px;line-height:1.2}
+    .fits{gap:4px}
+    .fits span{font-size:11px;padding:4px 6px}
+    .why{gap:4px;font-size:12.5px;line-height:1.35}
+    .why li{gap:6px}
+    .why li::before{margin-top:6px}
+    .price__btn{min-height:42px;padding:10px 6px;font-size:13px;gap:6px}
+    .price__btn svg{width:14px;height:14px}
+    .price__box{padding:9px 8px}
+    .price__tel{font-size:13.5px;gap:5px}
+    .price__tel svg{display:none}
+    .price__note{font-size:12px}
+    .price__hours{font-size:11px}
+    /* список на телефоне: одна колонка, фото слева */
+    .grid.is-list{grid-template-columns:1fr;gap:10px}
+    .grid.is-list .card__img{width:34%}
+    .grid.is-list .card__body{padding:12px 12px 14px}
+    .grid.is-list .card h3{font-size:16px}
+    .grid.is-list .why{font-size:13px}
+  }
+
+  /* живой дом */
+  .hx-house .sky-disc{display:none}
+  .hx-house .tree .sway{transform-box:fill-box;transform-origin:50% 100%}
+  .hx-house .puff{opacity:0;transform-box:fill-box;transform-origin:50% 50%}
+  @media (max-width:609px), (min-width:610px) and (max-aspect-ratio:1/1){
+    .hx-house{background:none!important}
+    .hx-house .sky-disc{display:inline}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hx-house .sky-disc{animation:fadeIn .8s ease .1s both}
+    .hx-house .sun{animation:pop .5s cubic-bezier(.2,.9,.3,1.3) 2.6s both}
+    .hx-house .cloud{animation:fadeIn .6s ease 2.7s both, drift 9s ease-in-out 3.3s infinite alternate}
+    .hx-house .c2{animation-delay:2.8s, 3.3s;animation-direction:normal, alternate-reverse}
+    .hx-house .tree-l{animation:grow .45s cubic-bezier(.2,.9,.3,1.2) 2.55s both}
+    .hx-house .tree-r{animation:grow .45s cubic-bezier(.2,.9,.3,1.2) 2.68s both}
+    .hx-house .tree .sway{animation:sway 4.5s ease-in-out 3.2s infinite alternate}
+    .hx-house .tree-r .sway{animation-duration:5.2s}
+    .hx-house .puff{animation:smoke 3.6s linear infinite}
+    .hx-house .p1{animation-delay:3s}.hx-house .p2{animation-delay:4.2s}.hx-house .p3{animation-delay:5.4s}
+    @keyframes drift{from{transform:translateX(-5px)}to{transform:translateX(6px)}}
+    @keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+    @keyframes smoke{0%{opacity:0;transform:translate(0,0) scale(.5)}15%{opacity:.6}100%{opacity:0;transform:translate(-12px,-34px) scale(1.7)}}
+  }
 </style>
 </head>
 <body>
@@ -675,7 +759,35 @@
             <stop offset="1" stop-color="#C68B50"/>
           </linearGradient>
           <clipPath id="gableClip"><polygon points="110,96 190,51 270,96"/></clipPath>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FCF3E3"/>
+            <stop offset=".6" stop-color="#F3F1EA"/>
+            <stop offset="1" stop-color="#E2ECE6"/>
+          </linearGradient>
+          <radialGradient id="sunGlow"><stop offset="0" stop-color="#F6D9A0" stop-opacity=".9"/><stop offset="1" stop-color="#F6D9A0" stop-opacity="0"/></radialGradient>
         </defs>
+
+        <!-- небо за домом -->
+        <g class="sky">
+          <circle class="sky-disc" cx="190" cy="110" r="104" fill="url(#skyGrad)" stroke="rgba(21,25,27,.06)"/>
+          <g class="sun t-pop"><circle cx="138" cy="36" r="22" fill="url(#sunGlow)"/><circle cx="138" cy="36" r="10" fill="#F2C987"/></g>
+          <g class="cloud c1"><path d="M84 72a8 8 0 0 1 8-8 11 11 0 0 1 21 3 7 7 0 0 1 1 14H90a8 8 0 0 1-6-9z" fill="#fff" opacity=".95"/></g>
+          <g class="cloud c2"><path d="M300 58a7 7 0 0 1 7-7 10 10 0 0 1 19 3 6 6 0 0 1 1 12h-22a7 7 0 0 1-5-8z" fill="#fff" opacity=".9"/></g>
+        </g>
+
+        <!-- деревья по бокам -->
+        <g class="tree tree-l t-box"><g class="sway">
+          <rect x="49" y="174" width="6" height="20" rx="1.5" fill="#8F5530"/>
+          <polygon points="52,110 35,142 69,142" fill="#4F8266"/>
+          <polygon points="52,124 31,160 73,160" fill="#3F6F57"/>
+          <polygon points="52,140 28,178 76,178" fill="#4F8266"/>
+        </g></g>
+        <g class="tree tree-r t-box"><g class="sway">
+          <rect x="327" y="156" width="6" height="38" rx="1.5" fill="#8F5530"/>
+          <circle cx="318" cy="150" r="15" fill="#5D8B6A"/>
+          <circle cx="343" cy="152" r="14" fill="#7AA585"/>
+          <circle cx="330" cy="136" r="21" fill="#6C9A78"/>
+        </g></g>
 
         <ellipse class="shadow" cx="190" cy="198" rx="158" ry="7" fill="rgba(35,38,42,.08)"/>
         <path class="ground" pathLength="1" d="M24 194 H356" stroke="#CFCAC1" stroke-width="2" stroke-linecap="round"/>
@@ -707,6 +819,13 @@
         <g class="chimney t-box">
           <rect x="228" y="44" width="16" height="36" rx="1.5" fill="#B5703F"/>
           <rect x="225" y="40" width="22" height="6" rx="1.5" fill="#8F5530"/>
+        </g>
+
+        <!-- дымок из трубы -->
+        <g class="smoke" aria-hidden="true">
+          <circle class="puff p1" cx="236" cy="32" r="5" fill="#CFC8BE"/>
+          <circle class="puff p2" cx="236" cy="32" r="5" fill="#CFC8BE"/>
+          <circle class="puff p3" cx="236" cy="32" r="5" fill="#CFC8BE"/>
         </g>
 
         <!-- крыша — как в логотипе -->
@@ -804,7 +923,13 @@
         </div>
         <div class="chips" id="chips" role="group" aria-label="Категория"></div>
       </div>
-      <div class="status" id="status" aria-live="polite"></div>
+      <div class="catbar">
+        <div class="status" id="status" aria-live="polite"></div>
+        <div class="view" role="group" aria-label="Вид каталога">
+          <button type="button" data-view="grid" aria-pressed="true" title="Плиткой"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span>Плитка</span></button>
+          <button type="button" data-view="list" aria-pressed="false" title="Списком"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 5h5v5H4zM4 14h5v5H4zM12 7h8M12 16h8"/></svg><span>Список</span></button>
+        </div>
+      </div>
 
       <div class="grid" id="grid"></div>
       <noscript><p>Каталог доступен по телефону: <a href="tel:+79519459239">+7 (951) 945-92-39</a></p></noscript>
@@ -1024,6 +1149,7 @@
   function fitHero(){
     var chrome = ribbonEl.offsetHeight + headerEl.offsetHeight;
     root.style.setProperty('--chrome', chrome + 'px');
+    root.style.setProperty('--hdr', headerEl.offsetHeight + 'px');
     var h = window.innerHeight - chrome, w = root.clientWidth;
     root.style.setProperty('--s', Math.min(Math.max(h, 540) / 800, w / 900).toFixed(4));
   }
@@ -1062,7 +1188,7 @@
   ];
   var OBJ_NAMES = {house:'Дом', dacha:'Дача', flat:'Квартира'};
   var OBJ_GEN = {house:'дома', dacha:'дачи', flat:'квартиры'};
-  var INITIAL = window.matchMedia('(max-width:600px)').matches ? 4 : 8;
+  var INITIAL = window.matchMedia('(max-width:600px)').matches ? 6 : 8;
 
   // аналитика: события для метрик из PRD (нажатия «Уточнить стоимость» и клики по tel:)
   window.dataLayer = window.dataLayer || [];
@@ -1148,6 +1274,18 @@
   });
   moreBtn.addEventListener('click', function(){ state.expanded = true; render(); });
 
+  // вид каталога: плитка (по умолчанию) или список; выбор запоминается
+  var viewBtns = document.querySelectorAll('.view button');
+  function setView(v){
+    grid.classList.toggle('is-list', v === 'list');
+    viewBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.view === v ? 'true' : 'false'); });
+    try { localStorage.setItem('mix-view', v); } catch (e) {}
+  }
+  var savedView = 'grid';
+  try { savedView = localStorage.getItem('mix-view') || 'grid'; } catch (e) {}
+  setView(savedView === 'list' ? 'list' : 'grid');
+  viewBtns.forEach(function(b){ b.addEventListener('click', function(){ setView(b.dataset.view); track('catalog_view', {view:b.dataset.view}); }); });
+
   // «Уточнить стоимость» → раскрываем кликабельный номер
   grid.addEventListener('click', function(e){
     var btn = e.target.closest('.price__btn'); if (!btn) return;
@@ -1177,6 +1315,21 @@
     li.addEventListener('click', toggle);
     li.addEventListener('keydown', function(e){ if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggle(); } });
   });
+
+  // меню в шапке: подсвечиваем раздел, который сейчас на экране
+  var navLinks = document.querySelectorAll('.nav a');
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function(a){ a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    navLinks.forEach(function(a){ var t = document.querySelector(a.getAttribute('href')); if (t) spy.observe(t); });
+    new IntersectionObserver(function(en){
+      if (en[0].isIntersecting) navLinks.forEach(function(a){ a.classList.remove('is-current'); });
+    }, {rootMargin:'-45% 0px -50% 0px'}).observe(document.querySelector('.hx'));
+  }
 
   // мобильная кнопка звонка: после первого экрана, прячется у финального блока
   var bar = document.getElementById('callbar'), finalSec = document.getElementById('call');
